@@ -107,6 +107,11 @@ test("delete specific blog", async () => {
   await api.delete("/api/blogs/5a422a851b54a676234d17f7").expect(204);
 
   const response = await api.get("/api/blogs");
+  const deletedBlog = response.body.find(
+    (blog) => blog.id === "5a422a851b54a676234d17f7",
+  );
+
+  expect(deletedBlog).toBeUndefined();
 
   assert.strictEqual(response.body.length, helper.initialBlogs.length - 1);
 });

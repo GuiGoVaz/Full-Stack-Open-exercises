@@ -93,9 +93,11 @@ test("update likes", async () => {
   const update = {
     likes: 7,
   };
-  await api.put("/api/blogs/5a422a851b54a676234d17f7").send(update).expect(200);
 
-  const response = await api.get("/api/blogs");
+  const response = await api
+    .put("/api/blogs/5a422a851b54a676234d17f7")
+    .send(update)
+    .expect(200);
 
   const updatedBlog = response.body.find(
     (blog) => blog.id === "5a422a851b54a676234d17f7",

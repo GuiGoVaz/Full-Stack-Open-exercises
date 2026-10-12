@@ -43,7 +43,7 @@ test("a valid blog can be added ", async () => {
     },
   ];
 
-  await api.post("/api/blogs").send(listWithOneBlog).expect(201);
+  await api.post("/api/blogs").send(listWithOneBlog[0]).expect(201);
 
   const response = await api.get("/api/blogs");
 

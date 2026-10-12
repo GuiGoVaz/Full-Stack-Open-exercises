@@ -42,6 +42,7 @@ test("a valid blog can be added ", async () => {
       __v: 0,
     },
   ];
+  console.log(listWithOneBlog);
   console.log(helper.initialBlogs);
   console.log(helper.initialBlogs[0]);
   await api.post("/api/blogs").send(listWithOneBlog).expect(201);

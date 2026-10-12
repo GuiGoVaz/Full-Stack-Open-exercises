@@ -25,7 +25,7 @@ test("notes are returned as json", async () => {
 test("all notes are returned", async () => {
   const response = await api.get("/api/notes");
 
-  assert.strictEqual(response.body.length, 2);
+  assert.strictEqual(response.body.length, initialNotes.length);
 });
 
 test("a specific note is within the returned notes", async () => {

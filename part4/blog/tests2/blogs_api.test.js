@@ -51,7 +51,7 @@ test("a valid blog can be added ", async () => {
 
   assert.strictEqual(response.body.length, helper.initialBlogs.length + 1);
 
-  assert(titles.includes("React patterns"));
+  assert(titles.includes("Go To Statement Considered Harmful"));
 });
 
 /* test("a specific note is within the returned notes", async () => {

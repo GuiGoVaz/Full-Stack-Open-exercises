@@ -104,7 +104,7 @@ test("update likes", async () => {
     (blog) => blog.id === "5a422a851b54a676234d17f7",
   ); */
 
-  assert.strictEqual(updatedBlog.likes, 7);
+  assert.strictEqual(updatedBlog.body.likes, 7);
 });
 
 /* test("delete specific blog", async () => {

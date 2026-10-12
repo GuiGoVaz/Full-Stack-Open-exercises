@@ -91,7 +91,7 @@ test("without title or url receives 400 Bad Request", async () => {
 
 test("update likes", async () => {
   const update = {
-    likes: 7,
+    likes: 5,
   };
   const response = await api
     .put("/api/blogs/5a422a851b54a676234d17f7")
@@ -100,18 +100,12 @@ test("update likes", async () => {
 
   const updatedBlog = response.body;
 
-  assert.strictEqual(updatedBlog.likes, 7);
+  assert.strictEqual(updatedBlog.likes, 5);
 });
 
 /* test("delete specific blog", async () => {
-  const newBlog = {
-    _id: "5a422a851b54a676234d17f7",
-    title: "React patterns",
-    author: "Michael Chan",
-    url: "https://reactpatterns.com/",
-    __v: 0,
-  };
-  await api.post("/api/blogs").send(newBlog).expect(201);
+  
+  await api.delete("/api/blogs").send(newBlog).expect(201);
 
   const response = await api.get("/api/blogs");
 

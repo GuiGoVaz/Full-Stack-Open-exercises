@@ -31,6 +31,27 @@ test("all blogs are returned as json", async () => {
   assert.strictEqual(response.body.length, helper.initialBlogs.length);
 });
 
+test("a valid blog can be added ", async () => {
+  const newNote = {
+    content: "async/await simplifies making async calls",
+    important: true,
+  };
+
+  await api
+    .post("/api/notes")
+    .send(newNote)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
+
+  const response = await api.get("/api/notes");
+
+  const contents = response.body.map((r) => r.content);
+
+  assert.strictEqual(response.body.length, initialNotes.length + 1);
+
+  assert(contents.includes("async/await simplifies making async calls"));
+});
+
 /* test("a specific note is within the returned notes", async () => {
   const response = await api.get("/api/notes");
 

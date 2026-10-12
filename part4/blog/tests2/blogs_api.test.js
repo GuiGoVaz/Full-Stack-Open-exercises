@@ -18,10 +18,10 @@ beforeEach(async () => {
 });
 
 test("identifier is id (not _id)", async () => {
-  await api
-    .get("/api/notes")
-    .expect(200)
-    .expect("Content-Type", /application\/json/);
+  const response = await api.get("/api/blogs");
+
+  assert(!ids.includes(noteToDelete.id));
+  assert.strictEqual(response.body.length, helper.initialBlogs.length);
 });
 
 test("all blogs are returned as json", async () => {

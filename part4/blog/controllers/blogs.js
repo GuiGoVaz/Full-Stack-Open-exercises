@@ -13,7 +13,7 @@ blogsRouter.get("/", async (request, response) => {
 blogsRouter.post("/", async (request, response) => {
   const blog = new Blog(request.body);
   if (!Object.hasOwn(blog, "title") || !Object.hasOwn(blog, "url")) {
-    response.status(201);
+    response.status(400).end();
   }
   if (!Object.hasOwn(blog, "likes")) {
     blog.likes = 0;

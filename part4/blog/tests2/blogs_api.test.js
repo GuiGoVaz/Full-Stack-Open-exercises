@@ -69,21 +69,24 @@ test("with likes properties missing is set to 0", async () => {
 });
 
 test("without title or url receives 400 Bad Request", async () => {
-  const newBlog = {
-    _id: "5a422b3a1b54a676234d17f9",
-    title: "Canonical string reduction",
+  const newBlog1 = {
+    //_id: "5a422b3a1b54a676234d17f9",
+    //title: "Canonical string reduction",
     author: "Edsger W. Dijkstra",
     url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
     likes: 12,
     __v: 0,
   };
-  await api.post("/api/blogs").send(newBlog).expect(201);
-
-  const response = await api.get("/api/blogs");
-
-  const sentBlog = response.body.find((blog) => blog.id === newBlog._id);
-
-  assert.strictEqual(sentBlog.likes, 0);
+  const newBlog2 = {
+    //_id: "5a422b3a1b54a676234d17f9",
+    title: "Canonical string reduction",
+    author: "Edsger W. Dijkstra",
+    //url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+    likes: 12,
+    __v: 0,
+  };
+  await api.post("/api/blogs").send(newBlog1).expect(400);
+  await api.post("/api/blogs").send(newBlog2).expect(400);
 });
 
 after(async () => {

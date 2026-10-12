@@ -41,3 +41,7 @@ describe("when there is initially one user in db", () => {
     assert(usernames.includes(newUser.username));
   });
 });
+
+after(async () => {
+  await mongoose.connection.close();
+});

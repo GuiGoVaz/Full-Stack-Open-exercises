@@ -64,6 +64,7 @@ test("with likes properties missing is set to 0", async () => {
   const response = await api.get("/api/blogs");
 
   const sentBlog = response.body.find((blog) => blog.id === newBlog._id);
+  console.log(sentBlog);
 
   assert.strictEqual(sentBlog.likes, 0);
 });

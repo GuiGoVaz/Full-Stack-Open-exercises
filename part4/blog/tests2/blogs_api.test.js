@@ -33,9 +33,13 @@ test("all blogs are returned as json", async () => {
 
 test("a valid blog can be added ", async () => {
   await api.post("/api/blogs").send([helper.initialBlogs[0]]).expect(201);
+
   const response = await api.get("/api/blogs");
+
   const titles = response.body.map((r) => r.title);
-  assert.strictEqual(response.body.length, initialBLogs.length + 1);
+
+  assert.strictEqual(response.body.length, helper.initialBLogs.length + 1);
+
   assert(titles.includes("React patterns"));
 });
 

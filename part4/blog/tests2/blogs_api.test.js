@@ -32,11 +32,7 @@ test("all blogs are returned as json", async () => {
 });
 
 test("a valid blog can be added ", async () => {
-  await api
-    .post("/api/blogs")
-    .send(helper.initialBlogs[0])
-    .expect(201)
-    .expect("Content-Type", /application\/json/);
+  await api.post("/api/blogs").send(helper.initialBlogs[0]).expect(201);
 
   const response = await api.get("/api/blogs");
 

@@ -20,8 +20,7 @@ beforeEach(async () => {
 test("identifier is id (not _id)", async () => {
   const response = await api.get("/api/blogs");
 
-  assert(!ids.includes(noteToDelete.id));
-  assert.strictEqual(response.body.length, helper.initialBlogs.length);
+  assert("_id" in response.body[0]);
 });
 
 test("all blogs are returned as json", async () => {

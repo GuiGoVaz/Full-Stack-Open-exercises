@@ -89,6 +89,46 @@ test("without title or url receives 400 Bad Request", async () => {
   await api.post("/api/blogs").send(newBlog2).expect(400);
 });
 
+test("update likes", async () => {
+  const newBlog = {
+    /* _id: "5a422a851b54a676234d17f7",
+    title: "React patterns",
+    author: "Michael Chan",
+    url: "https://reactpatterns.com/",
+    __v: 0, */
+    likes: 6,
+  };
+  await api
+    .put("/api/blogs/5a422a851b54a676234d17f7")
+    .send(newBlog)
+    .expect(201);
+
+  const response = await api.get("/api/blogs");
+
+  const updatedBlog = response.body.find(
+    (blog) => blog.id === "5a422a851b54a676234d17f7",
+  );
+
+  assert.strictEqual(updatedBlog.likes, 6);
+});
+
+/* test("delete specific blog", async () => {
+  const newBlog = {
+    _id: "5a422a851b54a676234d17f7",
+    title: "React patterns",
+    author: "Michael Chan",
+    url: "https://reactpatterns.com/",
+    __v: 0,
+  };
+  await api.post("/api/blogs").send(newBlog).expect(201);
+
+  const response = await api.get("/api/blogs");
+
+  const sentBlog = response.body.find((blog) => blog.id === newBlog._id);
+
+  assert.strictEqual(sentBlog.likes, 0);
+}); */
+
 after(async () => {
   await mongoose.connection.close();
 });

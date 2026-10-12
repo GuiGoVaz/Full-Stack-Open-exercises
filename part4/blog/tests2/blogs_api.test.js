@@ -38,13 +38,13 @@ test("a valid blog can be added ", async () => {
     .expect(201)
     .expect("Content-Type", /application\/json/);
 
-  const response = await api.get("/api/notes");
+  const response = await api.get("/api/blogs");
 
-  const contents = response.body.map((r) => r.content);
+  const titles = response.body.map((r) => r.title);
 
-  assert.strictEqual(response.body.length, initialNotes.length + 1);
+  assert.strictEqual(response.body.length, initialBLogs.length + 1);
 
-  assert(contents.includes("async/await simplifies making async calls"));
+  assert(titles.includes("React patterns"));
 });
 
 /* test("a specific note is within the returned notes", async () => {

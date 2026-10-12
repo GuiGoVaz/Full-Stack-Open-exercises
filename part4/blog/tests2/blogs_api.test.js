@@ -103,16 +103,13 @@ test("update likes", async () => {
   assert.strictEqual(updatedBlog.likes, 5);
 });
 
-/* test("delete specific blog", async () => {
-  
-  await api.delete("/api/blogs").send(newBlog).expect(201);
+test("delete specific blog", async () => {
+  await api.delete("/api/blogs/5a422a851b54a676234d17f7").expect(204);
 
   const response = await api.get("/api/blogs");
 
-  const sentBlog = response.body.find((blog) => blog.id === newBlog._id);
-
-  assert.strictEqual(sentBlog.likes, 0);
-}); */
+  assert.strictEqual(response.body.length, helper.initialBlogs.length - 1);
+});
 
 after(async () => {
   await mongoose.connection.close();

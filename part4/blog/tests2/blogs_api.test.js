@@ -32,14 +32,9 @@ test("all blogs are returned as json", async () => {
 });
 
 test("a valid blog can be added ", async () => {
-  const newNote = {
-    content: "async/await simplifies making async calls",
-    important: true,
-  };
-
   await api
     .post("/api/notes")
-    .send(newNote)
+    .send(helper.initialBlogs[0])
     .expect(201)
     .expect("Content-Type", /application\/json/);
 

@@ -12,12 +12,15 @@ blogsRouter.get("/", async (request, response) => {
 
 blogsRouter.post("/", async (request, response) => {
   const blog = new Blog(request.body);
-  if (!Object.hasOwn(blog, "title") || !Object.hasOwn(blog, "url")) {
-    response.status(400).end();
+  const { title, url, likes } = request.body;
+
+  if (!title || !url) {
+    return response.status(400).json({ error: "title or url missing" });
   }
-  if (!Object.hasOwn(blog, "likes")) {
+  if (!likes) {
     blog.likes = 0;
   }
+
   const savedBlog = await blog.save();
   response.status(201).json(savedBlog);
 });

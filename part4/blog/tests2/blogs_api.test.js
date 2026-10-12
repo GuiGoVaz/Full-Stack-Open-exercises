@@ -6,6 +6,15 @@ const assert = require("node:assert");
 
 const api = supertest(app);
 
+beforeEach(async () => {
+  await Blog.deleteMany({});
+
+  for (const blog of helper.initialBlogs) {
+    const blogObject = new Blog(note);
+    await blogObject.save();
+  }
+});
+
 test("notes are returned as json", async () => {
   await api
     .get("/api/notes")

@@ -90,18 +90,10 @@ test("without title or url receives 400 Bad Request", async () => {
 });
 
 test("update likes", async () => {
-  const newBlog = {
-    _id: "5a422a851b54a676234d17f7",
-    title: "React patterns",
-    author: "Michael Chan",
-    url: "https://reactpatterns.com/",
+  const update = {
     likes: 7,
-    __v: 0,
-  },
-  await api
-    .put("/api/blogs/5a422a851b54a676234d17f7")
-    .send(newBlog)
-    .expect(201);
+  };
+  await api.put("/api/blogs/5a422a851b54a676234d17f7").send(update).expect(200);
 
   const response = await api.get("/api/blogs");
 

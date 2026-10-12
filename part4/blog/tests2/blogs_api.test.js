@@ -24,12 +24,12 @@ beforeEach(async () => {
     .expect("Content-Type", /application\/json/);
 }); */
 
-test("all notes are returned as json", async () => {
+test("all blogs are returned as json", async () => {
   const response = await api
-    .get("/api/notes")
+    .get("/api/blogs")
     .expect("Content-Type", /application\/json/);
 
-  assert.strictEqual(response.body.length, initialNotes.length);
+  assert.strictEqual(response.body.length, helper.initialBlogs.length);
 });
 
 /* test("a specific note is within the returned notes", async () => {

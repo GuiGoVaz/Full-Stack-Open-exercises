@@ -51,12 +51,12 @@ test("a valid blog can be added ", async () => {
   assert(titles.includes("Go To Statement Considered Harmful"));
 });
 
-/* test("a specific note is within the returned notes", async () => {
+test("if likes properties is missing is set to 0", async () => {
   const response = await api.get("/api/notes");
 
   const contents = response.body.map((e) => e.content);
   assert(contents.includes("HTML is easy"));
-}); */
+});
 
 after(async () => {
   await mongoose.connection.close();

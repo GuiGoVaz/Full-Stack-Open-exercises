@@ -26,4 +26,28 @@ blogsRouter.post("/", async (request, response) => {
   response.status(201).json(savedBlog);
 });
 
+blogsRouter.put("/api/blogs/:id", (request, response) => {
+  const { likes } = request.body;
+
+  Blog.findById(request.params.id).then((blog) => {
+    if (!blog) {
+      return response.status(404).end();
+    }
+
+    blog.likes = likes;
+
+    return blog.save().then((updatedBlog) => {
+      response.json(updatedBlog);
+    });
+  });
+  //.catch((error) => next(error))
+});
+
+blogsRouter.delete("/api/blogs/:id", (request, response) => {
+  Blog.findByIdAndDelete(request.params.id).then(() => {
+    response.status(204).end();
+  });
+  //.catch((error) => next(error))
+});
+
 module.exports = blogsRouter;

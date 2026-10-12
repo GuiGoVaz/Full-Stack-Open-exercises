@@ -32,6 +32,7 @@ blogsRouter.put("/api/blogs/:id", (request, response) => {
   Blog.findById(request.params.id).then((blog) => {
     if (!blog) {
       return response.status(404).end();
+      console.log("ifff");
     }
 
     blog.likes = likes;

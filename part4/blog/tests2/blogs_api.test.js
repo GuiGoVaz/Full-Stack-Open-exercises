@@ -53,10 +53,10 @@ test("a valid blog can be added ", async () => {
 
 test("with likes properties missing is set to 0", async () => {
   const newBlog = {
-    _id: "5a422a851b54a676234d17f7",
-    title: "React patterns",
-    author: "Michael Chan",
-    url: "https://reactpatterns.com/",
+    _id: "5a422aa71b54a676234d17f8",
+    title: "Go To Statement Considered Harmful",
+    author: "Edsger W. Dijkstra",
+    url: "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf",
     __v: 0,
   };
   await api.post("/api/blogs").send(newBlog).expect(201);
@@ -70,19 +70,19 @@ test("with likes properties missing is set to 0", async () => {
 
 test("without title or url receives 400 Bad Request", async () => {
   const newBlog1 = {
-    //_id: "5a422b3a1b54a676234d17f9",
-    //title: "Canonical string reduction",
+    _id: "5a422aa71b54a676234d17f8",
+    //title: "Go To Statement Considered Harmful",
     author: "Edsger W. Dijkstra",
-    url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-    likes: 12,
+    url: "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf",
+    likes: 5,
     __v: 0,
   };
   const newBlog2 = {
-    //_id: "5a422b3a1b54a676234d17f9",
-    title: "Canonical string reduction",
+    _id: "5a422aa71b54a676234d17f8",
+    title: "Go To Statement Considered Harmful",
     author: "Edsger W. Dijkstra",
-    //url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-    likes: 12,
+    //url: "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf",
+    likes: 5,
     __v: 0,
   };
   await api.post("/api/blogs").send(newBlog1).expect(400);

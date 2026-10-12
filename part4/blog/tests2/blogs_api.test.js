@@ -38,7 +38,7 @@ test("a valid blog can be added ", async () => {
 
   const titles = response.body.map((r) => r.title);
 
-  assert.strictEqual(response.body.length, helper.initialBLogs.length + 1);
+  assert.strictEqual(response.body.length, helper.initialBlogs.length + 1);
 
   assert(titles.includes("React patterns"));
 });

@@ -94,16 +94,16 @@ test("update likes", async () => {
     likes: 7,
   };
 
-  const response = await api
+  const updatedBlog = await api
     .put("/api/blogs/5a422a851b54a676234d17f7")
     .send(update)
     .expect(200);
 
-  const updatedBlog = response.body.find(
+  /* const updatedBlog = response.body.find(
     (blog) => blog.id === "5a422a851b54a676234d17f7",
-  );
+  ); */
 
-  assert.strictEqual(updatedBlog.likes, 6);
+  assert.strictEqual(updatedBlog.likes, 7);
 });
 
 /* test("delete specific blog", async () => {

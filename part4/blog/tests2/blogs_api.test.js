@@ -51,11 +51,21 @@ test("a valid blog can be added ", async () => {
   assert(titles.includes("Go To Statement Considered Harmful"));
 });
 
-test("if likes properties is missing is set to 0", async () => {
-  const response = await api.get("/api/notes");
+test("with likes properties missing is set to 0", async () => {
+  const newBlog = {
+    _id: "5a422a851b54a676234d17f7",
+    title: "React patterns",
+    author: "Michael Chan",
+    url: "https://reactpatterns.com/",
+    __v: 0,
+  };
+  await api.post("/api/blogs").send(newBlog).expect(201);
 
-  const contents = response.body.map((e) => e.content);
-  assert(contents.includes("HTML is easy"));
+  const response = await api.get("/api/blogs");
+
+  const sentBlog = response.body.find((blog) => blog.id === newBlog._id);
+
+  assert.strictEqual(sentBlog.likes, 0);
 });
 
 after(async () => {

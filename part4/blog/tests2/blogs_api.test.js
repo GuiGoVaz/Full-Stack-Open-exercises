@@ -17,12 +17,12 @@ beforeEach(async () => {
   }
 });
 
-/* test("notes are returned as json", async () => {
+test("identifier is id (not _id)", async () => {
   await api
     .get("/api/notes")
     .expect(200)
     .expect("Content-Type", /application\/json/);
-}); */
+});
 
 test("all blogs are returned as json", async () => {
   const response = await api

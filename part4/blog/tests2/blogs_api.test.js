@@ -89,15 +89,15 @@ test("without title or url receives 400 Bad Request", async () => {
   await api.post("/api/blogs").send(newBlog2).expect(400);
 });
 
-/* test("update likes", async () => {
+test("update likes", async () => {
   const newBlog = {
-     _id: "5a422a851b54a676234d17f7",
+    _id: "5a422a851b54a676234d17f7",
     title: "React patterns",
     author: "Michael Chan",
     url: "https://reactpatterns.com/",
-    __v: 0, 
-    likes: 6,
-  };
+    likes: 7,
+    __v: 0,
+  },
   await api
     .put("/api/blogs/5a422a851b54a676234d17f7")
     .send(newBlog)
@@ -110,7 +110,7 @@ test("without title or url receives 400 Bad Request", async () => {
   );
 
   assert.strictEqual(updatedBlog.likes, 6);
-}); */
+});
 
 /* test("delete specific blog", async () => {
   const newBlog = {

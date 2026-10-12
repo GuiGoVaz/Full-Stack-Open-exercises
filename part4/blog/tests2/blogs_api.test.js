@@ -42,8 +42,9 @@ test("a valid blog can be added ", async () => {
       __v: 0,
     },
   ];
-
-  await api.post("/api/blogs").send(helper.initialBlogs[0]).expect(201);
+  console.log(helper.initialBlogs);
+  console.log(helper.initialBlogs[0]);
+  await api.post("/api/blogs").send(listWithOneBlog).expect(201);
   //const response = await api.get("/api/blogs");
   //const titles = response.body.map((r) => r.title);
   //assert.strictEqual(response.body.length, initialBLogs.length + 1);

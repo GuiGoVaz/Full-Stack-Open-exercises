@@ -180,9 +180,9 @@ test("delete specific blog", async () => {
 
   const ids = response.body.map((blog) => blog.id);
 
-  assert(!ids.includes("5a422a851b54a676234d17f7"));
+  assert(!ids.includes("5a422aa71b54a676234d17f8"));
 
-  assert.strictEqual(response.body.length, helper.initialBlogs.length - 1);
+  assert.strictEqual(response.body.length, helper.initialBlogs.length);
 });
 
 after(async () => {

@@ -31,15 +31,17 @@ blogsRouter.post("/", async (request, response) => {
     return response.status(401).json({ error: "token invalid" });
   }
   const user = await User.findById(decodedToken.id);
+  if (!user) {
+    return response.status(400).json({ error: "UserId missing or not valid" });
+  }
 
   /* const user = await User.findById(body.userId);
   if (!user) {
     return response.status(400).json({ error: "userId missing or not valid" });
   } */
-  const users = await User.find({});
 
   const blog = new Blog(request.body);
-  blog.user = users[0]._id;
+  blog.user = user._id;
 
   if (!likes) {
     blog.likes = 0;

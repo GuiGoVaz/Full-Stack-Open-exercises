@@ -16,6 +16,12 @@ mongoose
     console.error("error connection to MongoDB:", error.message);
   });
 
+const tokenExtractor = (request, response, next) => {
+  // code that extracts the token
+
+  next();
+};
+
 app.use(express.json());
 app.use(middleware.tokenExtractor);
 app.use("/api/blogs", blogsRouter);

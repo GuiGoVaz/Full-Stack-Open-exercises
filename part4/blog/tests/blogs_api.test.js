@@ -73,6 +73,15 @@ test("with likes properties missing is set to 0", async () => {
     url: "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf",
     __v: 0,
   };
+
+  const userResponse = await api.get("/api/users");
+  const userForToken = {
+    username: userResponse.body[0].username,
+    id: userResponse.body[0].id,
+  };
+
+  const token = jwt.sign(userForToken, process.env.SECRET);
+
   await api.post("/api/blogs").send(newBlog).expect(201);
 
   const response = await api.get("/api/blogs");
@@ -99,6 +108,15 @@ test("without title or url receives 400 Bad Request", async () => {
     likes: 5,
     __v: 0,
   };
+
+  const userResponse = await api.get("/api/users");
+  const userForToken = {
+    username: userResponse.body[0].username,
+    id: userResponse.body[0].id,
+  };
+
+  const token = jwt.sign(userForToken, process.env.SECRET);
+
   await api.post("/api/blogs").send(newBlog1).expect(400);
   await api.post("/api/blogs").send(newBlog2).expect(400);
 });
@@ -118,6 +136,14 @@ test("update likes", async () => {
 });
 
 test("delete specific blog", async () => {
+  const userResponse = await api.get("/api/users");
+  const userForToken = {
+    username: userResponse.body[0].username,
+    id: userResponse.body[0].id,
+  };
+
+  const token = jwt.sign(userForToken, process.env.SECRET);
+
   await api.delete("/api/blogs/5a422a851b54a676234d17f7").expect(204);
 
   const response = await api.get("/api/blogs");

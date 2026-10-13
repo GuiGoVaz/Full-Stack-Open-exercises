@@ -182,7 +182,7 @@ test("delete specific blog", async () => {
 
   assert(!ids.includes("5a422aa71b54a676234d17f8"));
 
-  assert.strictEqual(response.body.length, helper.initialBlogs.length);
+  assert.strictEqual(response.body.length, helper.initialBlogs.length); //the one deleted was also added now
 });
 
 after(async () => {

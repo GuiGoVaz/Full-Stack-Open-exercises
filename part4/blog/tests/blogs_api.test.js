@@ -42,11 +42,11 @@ test("a valid blog can be added ", async () => {
   };
   await api
     .post("/api/blogs")
-    .send(newBlog)
     .set(
       "Authorization",
       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3Q0IiwiaWQiOiI2YWNkN2ZiZmEyM2Q2M2ZjYmUxYmI2ZjMiLCJpYXQiOjE3OTE4NTM0NzR9.Pnd4DV1jRq_FqERv0zAohDjqQQLXSn-5oEhEnc0BzMw",
     )
+    .send(newBlog)
     .expect(201);
 
   const response = await api.get("/api/blogs");

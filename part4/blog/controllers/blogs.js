@@ -62,9 +62,9 @@ blogsRouter.delete("/:id", async (request, response) => {
     return response.status(400).json({ error: "UserId missing or not valid" });
   }
   const blog = await Blog.findById(request.params.id);
-  /* if (!blog) {
+  if (!blog) {
     return response.status(400).json({ error: "Blog not found" });
-  } */
+  }
   if (blog.user.toString() === user._id.toString()) {
     await blog.deleteOne();
     response.status(204).end();

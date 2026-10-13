@@ -35,11 +35,6 @@ blogsRouter.post("/", async (request, response) => {
     return response.status(400).json({ error: "UserId missing or not valid" });
   }
 
-  /* const user = await User.findById(body.userId);
-  if (!user) {
-    return response.status(400).json({ error: "userId missing or not valid" });
-  } */
-
   const blog = new Blog(request.body);
   blog.user = user._id;
 
@@ -48,8 +43,8 @@ blogsRouter.post("/", async (request, response) => {
   }
 
   const savedBlog = await blog.save();
-  //user.notes = user.notes.concat(savedNote._id);
-  //await user.save();
+  user.blogs = user.blogs.concat(savedBlog._id);
+  await user.save();
   response.status(201).json(savedBlog);
 });
 

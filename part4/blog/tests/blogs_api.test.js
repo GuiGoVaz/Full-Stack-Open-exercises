@@ -5,6 +5,7 @@ const app = require("../app");
 const assert = require("node:assert");
 const helper = require("./test_helper");
 const Blog = require("../models/blog");
+const jwt = require("jsonwebtoken");
 
 const api = supertest(app);
 

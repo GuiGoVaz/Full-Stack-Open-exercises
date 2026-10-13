@@ -17,7 +17,11 @@ mongoose
   });
 
 const tokenExtractor = (request, response, next) => {
-  // code that extracts the token
+  const authorization = request.get("authorization");
+  if (authorization && authorization.startsWith("Bearer ")) {
+    authorization.replace("Bearer ", "");
+    request.token = authorization;
+  }
 
   next();
 };

@@ -40,12 +40,18 @@ test("a valid blog can be added ", async () => {
     likes: 5,
     __v: 0,
   };
+
+  const userResponse = await api.get("/api/users");
+  const userForToken = {
+    username: userResponse.body[0].username,
+    id: userResponse.body[0].id,
+  };
+
+  const token = jwt.sign(userForToken, process.env.SECRET);
+
   await api
     .post("/api/blogs")
-    .set(
-      "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3Q0IiwiaWQiOiI2YWNkN2ZiZmEyM2Q2M2ZjYmUxYmI2ZjMiLCJpYXQiOjE3OTE4NTM0NzR9.Pnd4DV1jRq_FqERv0zAohDjqQQLXSn-5oEhEnc0BzMw",
-    )
+    .set("Authorization", `Bearer ${token}`)
     .send(newBlog)
     .expect(201);
 

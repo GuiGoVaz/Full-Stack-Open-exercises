@@ -66,6 +66,9 @@ blogsRouter.delete("/:id", async (request, response) => {
     await blog.deleteOne();
     response.status(204).end();
   }
+  return response
+    .status(401)
+    .json({ error: "token user isn't creator of blog to be deleted" });
 });
 
 module.exports = blogsRouter;

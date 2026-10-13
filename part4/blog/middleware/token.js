@@ -23,4 +23,5 @@ const userExtractor = async (request, response, next) => {
 
 module.exports = {
   tokenExtractor,
+  userExtractor,
 };

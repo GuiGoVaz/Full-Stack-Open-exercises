@@ -2,6 +2,7 @@ const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const middleware = require("../middleware/token");
 
 blogsRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({}).populate("user", { username: 1, name: 1 });
@@ -12,7 +13,7 @@ blogsRouter.get("/", async (request, response) => {
   }
 });
 
-blogsRouter.post("/", async (request, response) => {
+blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
   const { title, url, likes } = request.body;
   if (!title || !url) {
     return response.status(400).json({ error: "title or url missing" });
@@ -53,8 +54,11 @@ blogsRouter.put("/:id", async (request, response) => {
   response.json(updatedBlog);
 });
 
-blogsRouter.delete("/:id", async (request, response) => {
-  /* const decodedToken = jwt.verify(request.token, process.env.SECRET);
+blogsRouter.delete(
+  "/:id",
+  middleware.userExtractor,
+  async (request, response) => {
+    /* const decodedToken = jwt.verify(request.token, process.env.SECRET);
   if (!decodedToken.id) {
     return response.status(401).json({ error: "token invalid" });
   }
@@ -62,18 +66,19 @@ blogsRouter.delete("/:id", async (request, response) => {
   if (!user) {
     return response.status(400).json({ error: "UserId missing or not valid" });
   } */
-  const user = request.user;
-  const blog = await Blog.findById(request.params.id);
-  if (!blog) {
-    return response.status(400).json({ error: "Blog not found" });
-  }
-  if (blog.user.toString() === user._id.toString()) {
-    await blog.deleteOne();
-    return response.status(204).end();
-  }
-  return response
-    .status(401)
-    .json({ error: "token user isn't creator of blog to be deleted" });
-});
+    const user = request.user;
+    const blog = await Blog.findById(request.params.id);
+    if (!blog) {
+      return response.status(400).json({ error: "Blog not found" });
+    }
+    if (blog.user.toString() === user._id.toString()) {
+      await blog.deleteOne();
+      return response.status(204).end();
+    }
+    return response
+      .status(401)
+      .json({ error: "token user isn't creator of blog to be deleted" });
+  },
+);
 
 module.exports = blogsRouter;

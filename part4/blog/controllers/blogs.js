@@ -17,13 +17,14 @@ blogsRouter.post("/", async (request, response) => {
     return response.status(400).json({ error: "title or url missing" });
   }
 
-  const user = await User.findById(body.userId);
+  /* const user = await User.findById(body.userId);
   if (!user) {
     return response.status(400).json({ error: "userId missing or not valid" });
-  }
+  } */
+  const users = await User.find({});
 
   const blog = new Blog(request.body);
-  blog.user = user._id;
+  blog.user = users[0]._id;
 
   if (!likes) {
     blog.likes = 0;

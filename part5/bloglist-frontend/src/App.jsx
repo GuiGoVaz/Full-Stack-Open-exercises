@@ -71,10 +71,10 @@ const App = () => {
   )
 
   const blogForm = () => (
-    <><p>{user.name} logged in</p>
-    <button onClick={1} type="submit">
-          add
-        </button>
+    <><p>{user.name} logged in <button onClick={1} type="submit">
+          logout
+        </button></p>
+    
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}</>

@@ -69,7 +69,8 @@ const App = () => {
         <button type="submit">login</button>
       </form></>
   )
-  const logout = () => (window.localStorage.removeItem('loggedBlogappUser'))
+  const logout = () => {window.localStorage.removeItem('loggedBlogappUser');
+setUser(null)}
 
   const blogForm = () => (
     <><p>{user.name} logged in <button onClick={logout} type="submit">

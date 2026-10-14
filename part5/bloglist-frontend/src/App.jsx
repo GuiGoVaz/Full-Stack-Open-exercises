@@ -32,7 +32,7 @@ const App = () => {
   }
 
   const loginForm = () => (
-    <><h2>Login</h2>
+    <><h2>Log in to application</h2>
       <form onSubmit={handleLogin}>
         <div>
           <label>
@@ -59,7 +59,7 @@ const App = () => {
   )
 
   const blogForm = () => (
-    <>
+    <><h2>blogs</h2>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}</>
@@ -67,7 +67,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>blogs</h2>
+
       {!user && loginForm()}
       {user && (
         <div>

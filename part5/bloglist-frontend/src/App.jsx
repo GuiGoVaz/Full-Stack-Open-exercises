@@ -16,7 +16,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -30,7 +30,7 @@ const App = () => {
     try {
       const user = await loginService.login({ username, password })
       window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
+        'loggedBlogappUser', JSON.stringify(user)
       )
       setUser(user)
       setUsername('')
@@ -69,9 +69,10 @@ const App = () => {
         <button type="submit">login</button>
       </form></>
   )
+  const logout = () => (window.localStorage.removeItem('loggedBlogappUser'))
 
   const blogForm = () => (
-    <><p>{user.name} logged in <button onClick={1} type="submit">
+    <><p>{user.name} logged in <button onClick={logout} type="submit">
           logout
         </button></p>
     

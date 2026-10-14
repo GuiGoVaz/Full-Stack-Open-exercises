@@ -71,7 +71,15 @@ const App = () => {
   )
 
   const blogForm = () => (
-    <>
+    <><p>{user.name} logged in</p>
+    <label>
+            username
+            <input
+              type="text"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </label>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}</>
@@ -83,7 +91,6 @@ const App = () => {
       {!user && loginForm()}
       {user && (
         <div><h2>blogs</h2>
-          <p>{user.name} logged in</p>
           {blogForm()}
         </div>)}
 

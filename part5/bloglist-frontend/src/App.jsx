@@ -48,7 +48,6 @@ const App = () => {
       setTimeout(() => {
         setNotifMessage(null);
       }, 5000);
-      console.log("gf")
       /* setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
@@ -75,15 +74,16 @@ const App = () => {
       }, 5000);
     }
     catch {
-      /* setErrorMessage('wrong credentials')
+      setNotifMessage(`missing title or url`);
       setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000) */
+        setNotifMessage(null);
+      }, 5000);
     }
   }
 
   const loginForm = () => (
     <><h2>Log in to application</h2>
+      <Notification message={notifMessage} />
       <form onSubmit={handleLogin}>
         <div>
           <label>

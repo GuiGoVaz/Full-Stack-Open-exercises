@@ -11,12 +11,13 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [user, setUser] = useState(null)
+  const [newBlog, setNewBlog] = useState(0)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
     )
-  }, [])
+  }, [newBlog])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -32,6 +33,7 @@ const App = () => {
 
     try {
       const user = await loginService.login({ username, password })
+      blogService.setToken(user.token)
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
       )
@@ -48,21 +50,33 @@ const App = () => {
 
   const handleCreateBlog = async event => {
     event.preventDefault()
+    const blogObject = {
+      title: title,
+      author: author,
+      url: url
+    };
+    blogService.create(blogObject)
+    setUser(user)
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+    setNewBlog(newBlog + 1)
 
-    try {
-      const user = await loginService.login({ username, password })
-      window.localStorage.setItem(
-        'loggedBlogappUser', JSON.stringify(user)
-      )
-      setUser(user)
-      setUsername('')
-      setPassword('')
-    } catch {
-      /* setErrorMessage('wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000) */
-    }
+    /*  try {
+       const user = await blogService.create({ username, password })
+       window.localStorage.setItem(
+         'loggedBlogappUser', JSON.stringify(user)
+       )
+       setUser(user)
+       setTitle('')
+       setAuthor('')
+       setUrl('')
+     } catch { 
+      setErrorMessage('wrong credentials')
+     setTimeout(() => {
+       setErrorMessage(null)
+     }, 5000)} */
+
   }
 
   const loginForm = () => (

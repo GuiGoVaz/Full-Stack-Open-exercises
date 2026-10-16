@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import Notification from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -11,6 +12,7 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [user, setUser] = useState(null)
+  const [notifMessage, setNotifMessage] = useState(null)
 
 
   useEffect(() => {
@@ -56,28 +58,20 @@ const App = () => {
       author: author,
       url: url
     };
-    const returnedBlog = await blogService.create(blogObject)
-    setBlogs(blogs.concat(returnedBlog))
-    setTitle('')
-    setAuthor('')
-    setUrl('')
-
-
-    /*  try {
-       const user = await blogService.create({ username, password })
-       window.localStorage.setItem(
-         'loggedBlogappUser', JSON.stringify(user)
-       )
-       setUser(user)
-       setTitle('')
-       setAuthor('')
-       setUrl('')
-     } catch { 
-      setErrorMessage('wrong credentials')
-     setTimeout(() => {
-       setErrorMessage(null)
-     }, 5000)} */
-
+    try {
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+      setNotifMessage(`a new blog ${title} by ${author} added`);
+      setTitle('')
+      setAuthor('')
+      setUrl('')
+    }
+    catch {
+      /* setErrorMessage('wrong credentials')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000) */
+    }
   }
 
   const loginForm = () => (
@@ -169,6 +163,7 @@ const App = () => {
       {!user && loginForm()}
       {user && (
         <div><h2>blogs</h2>
+          <Notification message={notifMessage} />
           {loggedIn()}
           {createBlogForm()}
           {blogForm()}

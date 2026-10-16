@@ -57,7 +57,7 @@ const App = () => {
       url: url
     };
     blogService.create(blogObject)
-    setUser(user)
+    console.log(blogObject)
     setTitle('')
     setAuthor('')
     setUrl('')

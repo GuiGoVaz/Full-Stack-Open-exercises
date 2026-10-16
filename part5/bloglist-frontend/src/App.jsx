@@ -11,13 +11,13 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [user, setUser] = useState(null)
-  const [newBlog, setNewBlog] = useState(0)
+
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
     )
-  }, [newBlog])
+  }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -56,12 +56,12 @@ const App = () => {
       author: author,
       url: url
     };
-    blogService.create(blogObject)
-    console.log(blogObject)
+    const returnedBlog = await blogService.create(blogObject)
+    setBlogs(blogs.concat(returnedBlog))
     setTitle('')
     setAuthor('')
     setUrl('')
-    setNewBlog(newBlog + 1)
+
 
     /*  try {
        const user = await blogService.create({ username, password })

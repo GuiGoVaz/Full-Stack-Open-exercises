@@ -7,6 +7,9 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -25,6 +28,25 @@ const App = () => {
   }, [])
 
   const handleLogin = async event => {
+    event.preventDefault()
+
+    try {
+      const user = await loginService.login({ username, password })
+      window.localStorage.setItem(
+        'loggedBlogappUser', JSON.stringify(user)
+      )
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    } catch {
+      /* setErrorMessage('wrong credentials')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000) */
+    }
+  }
+
+  const handleCreateBlog = async event => {
     event.preventDefault()
 
     try {
@@ -71,29 +93,39 @@ const App = () => {
   )
 
   const createBlogForm = () => (
-    <><h2>Log in to application</h2>
-      <form onSubmit={handleLogin}>
+    <><h2>create new</h2>
+      <form onSubmit={handleCreateBlog}>
         <div>
           <label>
-            username
+            title:
             <input
               type="text"
-              value={username}
-              onChange={({ target }) => setUsername(target.value)}
+              value={title}
+              onChange={({ target }) => setTitle(target.value)}
             />
           </label>
         </div>
         <div>
           <label>
-            password
+            author:
             <input
-              type="password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
+              type="text"
+              value={author}
+              onChange={({ target }) => setAuthor(target.value)}
             />
           </label>
         </div>
-        <button type="submit">login</button>
+        <div>
+          <label>
+            url:
+            <input
+              type="text"
+              value={url}
+              onChange={({ target }) => setUrl(target.value)}
+            />
+          </label>
+        </div>
+        <button type="submit">create</button>
       </form></>
   )
 

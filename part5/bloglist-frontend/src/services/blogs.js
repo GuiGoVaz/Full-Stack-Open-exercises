@@ -5,7 +5,6 @@ let token = null;
 
 const setToken = (newToken) => {
   token = `Bearer ${newToken}`;
-  console.log(token);
 };
 
 const getAll = () => {
@@ -19,6 +18,7 @@ const getAll = () => {
 }; */
 
 const create = async (newObject) => {
+  console.log(newObject);
   const config = {
     headers: { Authorization: token },
   };

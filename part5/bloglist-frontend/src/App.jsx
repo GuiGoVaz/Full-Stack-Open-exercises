@@ -44,6 +44,11 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch {
+      setNotifMessage(`wrong username or password`);
+      setTimeout(() => {
+        setNotifMessage(null);
+      }, 5000);
+      console.log("gf")
       /* setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)

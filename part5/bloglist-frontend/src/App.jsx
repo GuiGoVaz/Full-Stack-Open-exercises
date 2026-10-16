@@ -103,8 +103,6 @@ const App = () => {
       setUser(null)
 
     }
-    window.localStorage.removeItem('loggedBlogappUser');
-    setUser(null)
     return (
       <p> {user.name} logged in <button onClick={logout} type="submit">
         logout

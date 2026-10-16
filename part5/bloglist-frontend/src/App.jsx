@@ -69,14 +69,51 @@ const App = () => {
         <button type="submit">login</button>
       </form></>
   )
-  const logout = () => {window.localStorage.removeItem('loggedBlogappUser');
-setUser(null)}
+
+  /* const createBlogForm = () => (
+    <><h2>Log in to application</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>
+            username
+            <input
+              type="text"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            password
+            <input
+              type="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </label>
+        </div>
+        <button type="submit">login</button>
+      </form></>
+  ) */
+
+  const loggedIn = () => {
+    const logout = () => {
+      window.localStorage.removeItem('loggedBlogappUser');
+      setUser(null)
+
+    }
+    window.localStorage.removeItem('loggedBlogappUser');
+    setUser(null)
+    return (
+      <p> {user.name} logged in <button onClick={logout} type="submit">
+        logout
+      </button></p>
+    )
+  }
 
   const blogForm = () => (
-    <><p>{user.name} logged in <button onClick={logout} type="submit">
-          logout
-        </button></p>
-    
+    <>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}</>
@@ -88,6 +125,7 @@ setUser(null)}
       {!user && loginForm()}
       {user && (
         <div><h2>blogs</h2>
+          {loggedIn()}
           {blogForm()}
         </div>)}
 

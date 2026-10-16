@@ -70,7 +70,7 @@ const App = () => {
       </form></>
   )
 
-  /* const createBlogForm = () => (
+  const createBlogForm = () => (
     <><h2>Log in to application</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -95,13 +95,12 @@ const App = () => {
         </div>
         <button type="submit">login</button>
       </form></>
-  ) */
+  )
 
   const loggedIn = () => {
     const logout = () => {
       window.localStorage.removeItem('loggedBlogappUser');
       setUser(null)
-
     }
     return (
       <p> {user.name} logged in <button onClick={logout} type="submit">
@@ -124,6 +123,7 @@ const App = () => {
       {user && (
         <div><h2>blogs</h2>
           {loggedIn()}
+          {createBlogForm()}
           {blogForm()}
         </div>)}
 

@@ -65,6 +65,9 @@ const App = () => {
       setTitle('')
       setAuthor('')
       setUrl('')
+      setTimeout(() => {
+        setNotifMessage(null);
+      }, 5000);
     }
     catch {
       /* setErrorMessage('wrong credentials')

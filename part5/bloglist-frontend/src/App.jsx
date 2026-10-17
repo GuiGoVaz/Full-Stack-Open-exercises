@@ -143,8 +143,8 @@ const App = () => {
   return (
     <div>
 
-      {!user && (<LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
-        setUsername={setUsername} password={password} setPassword={setPassword} />)}
+      {!user && (<div><LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
+        setUsername={setUsername} password={password} setPassword={setPassword} /> </div>)}
       {user && (
         <div><h2>blogs</h2>
           <Notification message={notifMessage} />

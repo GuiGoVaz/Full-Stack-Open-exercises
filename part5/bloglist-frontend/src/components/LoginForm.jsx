@@ -1,3 +1,5 @@
+import Notification from './9Notification'
+
 const LoginForm = (props) => (
     <><h2>Log in to application</h2>
         <Notification message={props.notifMessage} />

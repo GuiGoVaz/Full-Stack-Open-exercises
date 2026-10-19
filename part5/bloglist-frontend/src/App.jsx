@@ -6,6 +6,9 @@ import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import CreateBlogForm from './components/CreateBlogForm'
 import Togglable from './components/Toggable'
+import userService from './services/users'
+
+
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -60,12 +63,22 @@ const App = () => {
     )
   }
 
-  const blogForm = () => (
-    <>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}</>
-  )
+  const getUser = async (userId) => {
+    const user = userService.getByID(userId);
+    return user.name
+  }
+
+  const blogForm = () => {
+
+    return (
+      <>
+        {blogs.map(blog => {
+          const name = getUser(blog.user.toString());
+          return (<Blog key={blog.id} blog={blog} name={name} />)
+        }
+        )}</>
+    )
+  }
 
   return (
     <div>

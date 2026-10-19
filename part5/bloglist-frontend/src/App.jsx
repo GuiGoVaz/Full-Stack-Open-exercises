@@ -11,12 +11,8 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
-
-  //const [createBlogVisible, setCreateBlogVisible] = useState(false)
-
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -35,11 +31,9 @@ const App = () => {
 
   const handleLogin = async event => {
     event.preventDefault()
-
     try {
       const user = await loginService.login({ username, password })
       blogService.setToken(user.token)
-
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
       )
@@ -51,18 +45,8 @@ const App = () => {
       setTimeout(() => {
         setNotifMessage(null);
       }, 5000);
-      /* setErrorMessage('wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000) */
     }
   }
-
-
-
-
-
-
 
   const loggedIn = () => {
     const logout = () => {
@@ -85,20 +69,17 @@ const App = () => {
 
   return (
     <div>
-
       {!user && (<div><LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
         setUsername={setUsername} password={password} setPassword={setPassword} /> </div>)}
       {user && (
         <div><h2>blogs</h2>
           <Notification message={notifMessage} />
           {loggedIn()}
-          <Togglable buttonLabel="new blog">
+          <Togglable buttonLabel="create new blog">
             <CreateBlogForm setBlogs={setBlogs} blogs={blogs} setNotifMessage={setNotifMessage} />
           </Togglable>
-
           {blogForm()}
         </div>)}
-
     </div>
   )
 }

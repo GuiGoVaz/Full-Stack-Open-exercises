@@ -1,4 +1,4 @@
-import Notification from './9Notification'
+import Notification from './Notification'
 
 const LoginForm = (props) => (
     <><h2>Log in to application</h2>

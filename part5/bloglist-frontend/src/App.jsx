@@ -14,6 +14,8 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
 
+  //const [createBlogVisible, setCreateBlogVisible] = useState(false)
+
 
   useEffect(() => {
     blogService.getAll().then(blogs =>

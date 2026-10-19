@@ -33,4 +33,14 @@ usersRouter.get("/", async (request, response) => {
   response.json(users);
 });
 
+usersRouter.get("/:id", (request, response) => {
+  User.findById(request.params.id).then((user) => {
+    if (user) {
+      response.json(user);
+    } else {
+      response.status(404).end();
+    }
+  });
+});
+
 module.exports = usersRouter;

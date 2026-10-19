@@ -6,7 +6,7 @@ import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import CreateBlogForm from './components/CreateBlogForm'
 import Togglable from './components/Toggable'
-import userService from './services/users'
+
 
 
 
@@ -63,19 +63,12 @@ const App = () => {
     )
   }
 
-  const getUser = async (userId) => {
-    const user = userService.getByID(userId);
-    return user.name
-  }
-
   const blogForm = () => {
 
     return (
       <>
         {blogs.map(blog => {
-          console.log('blog.user:', blog.user);
-          const name = getUser(blog.user.toString());
-          return (<Blog key={blog.id} blog={blog} name={name} />)
+          return (<Blog key={blog.id} blog={blog} />)
         }
         )}</>
     )
@@ -89,7 +82,7 @@ const App = () => {
         <div><h2>blogs</h2>
           <Notification message={notifMessage} />
           {loggedIn()}
-          <Togglable buttonLabel="create new blog">
+          <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
             <CreateBlogForm setBlogs={setBlogs} blogs={blogs} setNotifMessage={setNotifMessage} />
           </Togglable>
           {blogForm()}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import blogService from '../services/blogs'
 
 
 const Blog = ({ blog }) => {
@@ -11,7 +12,8 @@ const Blog = ({ blog }) => {
   }
   const [visible, setVisible] = useState(false)
 
-  const handleLike = async () => {
+  const handleLike = async (id, likes) => {
+    blogService.update(id, likes)
     /* try {
       const user = await loginService.login({ username, password })
       blogService.setToken(user.token)
@@ -41,7 +43,7 @@ const Blog = ({ blog }) => {
       {visible && (
         <div>
           <div>{blog.url}</div>
-          <div>likes {blog.likes} <button onClick={handleLike}>
+          <div>likes {blog.likes} <button onClick={() => handleLike(blog.id, blog.likes + 1)}>
             like
           </button></div>
           <div>{blog.user?.name}</div>

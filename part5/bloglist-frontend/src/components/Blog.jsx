@@ -1,16 +1,19 @@
 import Togglable from './Toggable'
 import userService from '../services/login'
 
+const getUser = async (userId) => {
+  const user = userService.getByID(userId);
+  return user.name
+}
+
+
 const Blog = ({ blog }) => {
-  const getUser = async (userId) => {
-    const user = userService.getByID(userId);
-    return user.name
-  }
+  const a = getUser(blog.user)
 
   return (
     <div>
       {blog.title} {blog.author} <Togglable buttonLabel="view">
-        {blog.url} {blog.likes} {getUser(blog.user)}
+        {blog.url} {blog.likes} {a}
       </Togglable>
     </div>
   )

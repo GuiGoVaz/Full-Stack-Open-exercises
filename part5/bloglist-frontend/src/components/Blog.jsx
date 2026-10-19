@@ -1,4 +1,5 @@
 import Togglable from './Toggable'
+import userService from '../services/login'
 
 const Blog = ({ blog }) => (
   <div>

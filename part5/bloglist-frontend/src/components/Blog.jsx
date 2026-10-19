@@ -1,5 +1,5 @@
 import Togglable from './Toggable'
-import userService from '../services/login'
+import userService from '../services/users'
 
 const getUser = async (userId) => {
   const user = userService.getByID(userId);

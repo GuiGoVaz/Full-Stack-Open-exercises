@@ -48,6 +48,11 @@ const App = () => {
     }
   }
 
+  const handleCreateBlog = async blogObject => {
+    const returnedBlog = await blogService.create(blogObject)
+    setBlogs(blogs.concat(returnedBlog))
+  }
+
   const loggedIn = () => {
     const logout = () => {
       window.localStorage.removeItem('loggedBlogappUser');
@@ -76,7 +81,7 @@ const App = () => {
           <Notification message={notifMessage} />
           {loggedIn()}
           <Togglable buttonLabel="create new blog">
-            <CreateBlogForm setBlogs={setBlogs} blogs={blogs} setNotifMessage={setNotifMessage} />
+            <CreateBlogForm createBlog={handleCreateBlog} setNotifMessage={setNotifMessage} />
           </Togglable>
           {blogForm()}
         </div>)}

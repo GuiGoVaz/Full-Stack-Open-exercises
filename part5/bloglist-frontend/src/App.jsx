@@ -73,7 +73,7 @@ const App = () => {
     return (
       <>
         {blogs.map(blog => {
-          const name = getUser(blog.user.toString());
+          const name = getUser(blog.user._id.toString());
           return (<Blog key={blog.id} blog={blog} name={name} />)
         }
         )}</>

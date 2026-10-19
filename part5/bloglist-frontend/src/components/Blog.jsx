@@ -8,7 +8,7 @@ const getUser = async (userId) => {
 
 
 const Blog = ({ blog }) => {
-  const a = getUser(blog.user)
+  const a = getUser(blog.user.toString())
 
   return (
     <div>

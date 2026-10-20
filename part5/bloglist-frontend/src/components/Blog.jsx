@@ -11,27 +11,13 @@ const Blog = ({ blog }) => {
     marginBottom: 5
   }
   const [visible, setVisible] = useState(false)
+  const [likesUpdated, setLikesUpdated] = useState(0)
 
   const handleLike = async (blog) => {
-
     blog.likes = blog.likes + 1
     blog.user = blog.user.id
     blogService.update(blog.id, blog)
-    /* try {
-      const user = await loginService.login({ username, password })
-      blogService.setToken(user.token)
-      window.localStorage.setItem(
-        'loggedBlogappUser', JSON.stringify(user)
-      )
-      setUser(user)
-      setUsername('')
-      setPassword('')
-    } catch {
-      setNotifMessage(`wrong username or password`);
-      setTimeout(() => {
-        setNotifMessage(null);
-      }, 5000);
-    } */
+    setLikesUpdated(likesUpdated + 1)
   }
 
 

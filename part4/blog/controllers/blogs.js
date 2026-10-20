@@ -44,6 +44,7 @@ blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
 
 blogsRouter.put("/:id", async (request, response) => {
   const likes = request.body;
+  console.log(likes);
   const blog = await Blog.findById(request.params.id);
   if (!blog) {
     return response.status(404).end();

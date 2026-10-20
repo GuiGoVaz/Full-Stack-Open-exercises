@@ -12,8 +12,11 @@ const Blog = ({ blog }) => {
   }
   const [visible, setVisible] = useState(false)
 
-  const handleLike = async (id, likes) => {
-    blogService.update(id, likes)
+  const handleLike = async (blog) => {
+
+    blog.likes = blog.likes + 1
+    blog.user = blog.user.id
+    blogService.update(blog.id, blog)
     /* try {
       const user = await loginService.login({ username, password })
       blogService.setToken(user.token)
@@ -31,6 +34,7 @@ const Blog = ({ blog }) => {
     } */
   }
 
+
   return (
     <div style={blogStyle}>
       <div>
@@ -43,7 +47,7 @@ const Blog = ({ blog }) => {
       {visible && (
         <div>
           <div>{blog.url}</div>
-          <div>likes {blog.likes} <button onClick={() => handleLike(blog.id, 1)}>
+          <div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
             like
           </button></div>
           <div>{blog.user?.name}</div>

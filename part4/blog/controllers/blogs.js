@@ -43,13 +43,11 @@ blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
 });
 
 blogsRouter.put("/:id", async (request, response) => {
-  const likes = 1; //request.body;
-  console.log(request.body);
   const blog = await Blog.findById(request.params.id);
   if (!blog) {
     return response.status(404).end();
   }
-  blog.likes = likes;
+  Object.assign(blog, request.body);
   const updatedBlog = await blog.save();
   response.json(updatedBlog);
 });

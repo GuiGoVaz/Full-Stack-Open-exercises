@@ -48,6 +48,7 @@ blogsRouter.put("/:id", async (request, response) => {
     return response.status(404).end();
   }
   Object.assign(blog, request.body);
+  blog.user = blog.user.id;
   const updatedBlog = await blog.save();
   response.json(updatedBlog);
 });

@@ -47,7 +47,6 @@ blogsRouter.put("/:id", async (request, response) => {
   if (!blog) {
     return response.status(404).end();
   }
-  request.body.user = request.body.user.id; // the user arrives populated and is turned back to id
   Object.assign(blog, request.body);
 
   const updatedBlog = await blog.save();

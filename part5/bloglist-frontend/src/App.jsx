@@ -59,6 +59,10 @@ const App = () => {
     );
   };
 
+  const handleBlogDelete = (idToDelete) => {
+    setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== idToDelete));
+  };
+
   const loggedIn = () => {
     const logout = () => {
       window.localStorage.removeItem('loggedBlogappUser');
@@ -76,7 +80,7 @@ const App = () => {
     return (
       <>
         {blogs.map(blog => {
-          return (<Blog key={blog.id} blog={blog} user={user} handleBlogUpdate={handleBlogUpdate} />)
+          return (<Blog key={blog.id} blog={blog} user={user} handleBlogUpdate={handleBlogUpdate} handleBlogDelete={handleBlogDelete} />)
         }
         )}</>
     )

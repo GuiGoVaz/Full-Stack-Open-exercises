@@ -17,9 +17,8 @@ const Blog = ({ blog, user, handleBlogUpdate }) => {
     const updatedBlog = { ...blog };
     updatedBlog.likes = updatedBlog.likes + 1
     updatedBlog.user = updatedBlog.user.id;
-    const a = await blogService.update(blog.id, updatedBlog)
-    console.log(a)
-    handleBlogUpdate(updatedBlog)
+    const response = await blogService.update(blog.id, updatedBlog);
+    handleBlogUpdate(response)
     setUpdated(Updated + 1)
   }
 

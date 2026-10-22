@@ -44,10 +44,10 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch {
-      setNotifMessage(`wrong username or password`);
+      setNotifMessage('wrong username or password')
       setTimeout(() => {
-        setNotifMessage(null);
-      }, 5000);
+        setNotifMessage(null)
+      }, 5000)
     }
   }
 
@@ -56,16 +56,16 @@ const App = () => {
       prevBlogs.map(blog =>
         blog.id === updatedBlog.id ? updatedBlog : blog
       )
-    );
-  };
+    )
+  }
 
   const handleBlogDelete = (idToDelete) => {
-    setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== idToDelete));
-  };
+    setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== idToDelete))
+  }
 
   const loggedIn = () => {
     const logout = () => {
-      window.localStorage.removeItem('loggedBlogappUser');
+      window.localStorage.removeItem('loggedBlogappUser')
       setUser(null)
     }
     return (

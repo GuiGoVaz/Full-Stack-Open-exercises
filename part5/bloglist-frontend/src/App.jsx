@@ -16,6 +16,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
+  const [Updated, setUpdated] = useState(0)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -68,7 +69,7 @@ const App = () => {
     return (
       <>
         {blogs.map(blog => {
-          return (<Blog key={blog.id} blog={blog} user={user} />)
+          return (<Blog key={blog.id} blog={blog} user={user} Updated={Updated} setUpdated={setUpdated} />)
         }
         )}</>
     )
@@ -83,7 +84,7 @@ const App = () => {
           <Notification message={notifMessage} />
           {loggedIn()}
           <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
-            <CreateBlogForm setBlogs={setBlogs} blogs={blogs} setNotifMessage={setNotifMessage} />
+            <CreateBlogForm setBlogs={setBlogs} blogs={blogs} setNotifMessage={setNotifMessage} Updated={Updated} setUpdated={setUpdated} />
           </Togglable>
           {blogForm()}
         </div>)}

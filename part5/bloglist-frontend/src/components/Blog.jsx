@@ -2,7 +2,7 @@ import { useState } from 'react'
 import blogService from '../services/blogs'
 
 
-const Blog = ({ blog, user, Updated, setUpdated }) => {
+const Blog = ({ blog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -11,7 +11,7 @@ const Blog = ({ blog, user, Updated, setUpdated }) => {
     marginBottom: 5
   }
   const [visible, setVisible] = useState(false)
-
+  const [Updated, setUpdated] = useState(0)
 
   const handleLike = async (blog) => {
     blog.likes = blog.likes + 1

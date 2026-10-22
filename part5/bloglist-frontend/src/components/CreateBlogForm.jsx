@@ -6,7 +6,7 @@ import blogService from '../services/blogs'
 
 
 
-const CreateBlogForm = ({ setBlogs, blogs, setNotifMessage, Updated, setUpdated }) => {
+const CreateBlogForm = ({ setBlogs, blogs, setNotifMessage }) => {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
@@ -25,7 +25,6 @@ const CreateBlogForm = ({ setBlogs, blogs, setNotifMessage, Updated, setUpdated 
             setTitle('')
             setAuthor('')
             setUrl('')
-            setUpdated(Updated + 1)
             setTimeout(() => {
                 setNotifMessage(null);
             }, 5000);

@@ -14,8 +14,8 @@ const Blog = ({ blog, user }) => {
   const [Updated, setUpdated] = useState(0)
 
   const handleLike = async (blog) => {
-    blog.likes = blog.likes + 1
     const updatedBlog = { ...blog };
+    updatedBlog.likes = updatedBlog.likes + 1
     updatedBlog.user = updatedBlog.user.id;
     blogService.update(blog.id, updatedBlog)
     setUpdated(Updated + 1)

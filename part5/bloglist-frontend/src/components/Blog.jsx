@@ -2,7 +2,7 @@ import { useState } from 'react'
 import blogService from '../services/blogs'
 
 
-const Blog = ({ blog, user }) => {
+const Blog = ({ blog, user, handleBlogUpdate }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -17,7 +17,9 @@ const Blog = ({ blog, user }) => {
     const updatedBlog = { ...blog };
     updatedBlog.likes = updatedBlog.likes + 1
     updatedBlog.user = updatedBlog.user.id;
-    blogService.update(blog.id, updatedBlog)
+    const a = await blogService.update(blog.id, updatedBlog)
+    console.log(a)
+    handleBlogUpdate(updatedBlog)
     setUpdated(Updated + 1)
   }
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import blogService from '../services/blogs'
 
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -38,13 +38,14 @@ const Blog = ({ blog }) => {
             like
           </button></div>
           <div>{blog.user?.name}</div>
-          <button style={{
+          {(user.username === blog.user.username) && (<button style={{
             borderRadius: '4px',
             border: '1px solid #1367ba',
             background: 'linear-gradient(to bottom, #80ccff 0%, #33adff 45%, #0088cc 50%, #0099ff 100%)',
           }} onClick={() => handleLike(blog)}>
             remove
-          </button>
+          </button>)}
+
         </div>
       )}
     </div>

@@ -38,8 +38,8 @@ const Blog = ({ blog }) => {
             like
           </button></div>
           <div>{blog.user?.name}</div>
-          <button onClick={() => handleLike(blog)}>
-            like
+          <button style={{ backgroundColor: 'blue', }} onClick={() => handleLike(blog)}>
+            remove
           </button>
         </div>
       )}
@@ -48,3 +48,5 @@ const Blog = ({ blog }) => {
 }
 
 export default Blog
+
+

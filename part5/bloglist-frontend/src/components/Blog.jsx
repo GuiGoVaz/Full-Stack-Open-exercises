@@ -38,7 +38,11 @@ const Blog = ({ blog }) => {
             like
           </button></div>
           <div>{blog.user?.name}</div>
-          <button style={{ backgroundColor: 'blue', }} onClick={() => handleLike(blog)}>
+          <button style={{
+            borderRadius: '4px',
+            border: '1px solid #1367ba',
+            background: 'linear-gradient(to bottom, #80ccff 0%, #33adff 45%, #0088cc 50%, #0099ff 100%)',
+          }} onClick={() => handleLike(blog)}>
             remove
           </button>
         </div>

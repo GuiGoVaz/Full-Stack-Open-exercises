@@ -11,16 +11,22 @@ const Blog = ({ blog, user }) => {
     marginBottom: 5
   }
   const [visible, setVisible] = useState(false)
-  const [likesUpdated, setLikesUpdated] = useState(0)
+  const [Updated, setUpdated] = useState(0)
 
   const handleLike = async (blog) => {
     blog.likes = blog.likes + 1
     const updatedBlog = { ...blog };
     updatedBlog.user = updatedBlog.user.id;
     blogService.update(blog.id, updatedBlog)
-    setLikesUpdated(likesUpdated + 1)
+    setUpdated(Updated + 1)
   }
 
+  const handleRemove = async (blog) => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      blogService.remove(blog.id);
+      setUpdated(Updated + 1)
+    }
+  }
 
   return (
     <div style={blogStyle}>
@@ -42,7 +48,7 @@ const Blog = ({ blog, user }) => {
             borderRadius: '4px',
             border: '1px solid #1367ba',
             background: 'linear-gradient(to bottom, #80ccff 0%, #33adff 45%, #0088cc 50%, #0099ff 100%)',
-          }} onClick={() => handleLike(blog)}>
+          }} onClick={() => handleRemove(blog)}>
             remove
           </button>)}
 

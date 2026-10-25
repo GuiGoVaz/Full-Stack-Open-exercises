@@ -58,9 +58,22 @@ const App = () => {
       )
     )
   }
+  const handleLike = async (blog) => {
+    const updatedBlog = { ...blog }
+    updatedBlog.likes = updatedBlog.likes + 1
+    updatedBlog.user = updatedBlog.user.id
+    const response = await blogService.update(blog.id, updatedBlog)
+    handleBlogUpdate(response)
+  }
 
   const handleBlogDelete = (idToDelete) => {
     setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== idToDelete))
+  }
+  const handleRemove = async (blog) => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      blogService.remove(blog.id)
+      handleBlogDelete(blog.id)
+    }
   }
 
   const loggedIn = () => {
@@ -80,10 +93,36 @@ const App = () => {
     return (
       <>
         {blogs.map(blog => {
-          return (<Blog key={blog.id} blog={blog} user={user} handleBlogUpdate={handleBlogUpdate} handleBlogDelete={handleBlogDelete} />)
+          return (<Blog key={blog.id} blog={blog} user={user} handleLike={handleLike} handleRemove={handleRemove} />)
         }
         )}</>
     )
+  }
+
+  const handleCreateBlog = async event => {
+    event.preventDefault()
+    const blogObject = {
+      title: title,
+      author: author,
+      url: url
+    }
+    try {
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+      setNotifMessage(`a new blog ${title} by ${author} added`)
+      setTitle('')
+      setAuthor('')
+      setUrl('')
+      setTimeout(() => {
+        setNotifMessage(null)
+      }, 5000)
+    }
+    catch {
+      setNotifMessage('missing title or url')
+      setTimeout(() => {
+        setNotifMessage(null)
+      }, 5000)
+    }
   }
 
   return (

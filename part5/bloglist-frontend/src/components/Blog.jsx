@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import blogService from '../services/blogs'
 
 
-const Blog = ({ blog, user, handleBlogUpdate, handleBlogDelete }) => {
+
+const Blog = ({ blog, user, handleLike, handleRemove }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -12,20 +12,9 @@ const Blog = ({ blog, user, handleBlogUpdate, handleBlogDelete }) => {
   }
   const [visible, setVisible] = useState(false)
 
-  const handleLike = async (blog) => {
-    const updatedBlog = { ...blog }
-    updatedBlog.likes = updatedBlog.likes + 1
-    updatedBlog.user = updatedBlog.user.id
-    const response = await blogService.update(blog.id, updatedBlog)
-    handleBlogUpdate(response)
-  }
 
-  const handleRemove = async (blog) => {
-    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-      blogService.remove(blog.id)
-      handleBlogDelete(blog.id)
-    }
-  }
+
+
 
   return (
     <div style={blogStyle}>

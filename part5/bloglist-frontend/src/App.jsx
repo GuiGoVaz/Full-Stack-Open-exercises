@@ -5,7 +5,7 @@ import loginService from './services/login'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import CreateBlogForm from './components/CreateBlogForm'
-import Togglable from './components/Toggable'
+import Togglable from './components/Togglable'
 
 
 
@@ -16,6 +16,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
+
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -99,20 +100,14 @@ const App = () => {
     )
   }
 
-  const handleCreateBlog = async event => {
-    event.preventDefault()
-    const blogObject = {
-      title: title,
-      author: author,
-      url: url
-    }
+
+
+  const handleCreateBlog = async (blogObject) => {
+
     try {
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
-      setNotifMessage(`a new blog ${title} by ${author} added`)
-      setTitle('')
-      setAuthor('')
-      setUrl('')
+      setNotifMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
       setTimeout(() => {
         setNotifMessage(null)
       }, 5000)
@@ -122,6 +117,7 @@ const App = () => {
       setTimeout(() => {
         setNotifMessage(null)
       }, 5000)
+      throw new Error("missing title or url");
     }
   }
 
@@ -134,7 +130,7 @@ const App = () => {
           <Notification message={notifMessage} />
           {loggedIn()}
           <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
-            <CreateBlogForm setBlogs={setBlogs} blogs={blogs} setNotifMessage={setNotifMessage} />
+            <CreateBlogForm handleCreateBlog={handleCreateBlog} />
           </Togglable>
           {blogForm()}
         </div>)}

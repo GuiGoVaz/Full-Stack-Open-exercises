@@ -1,17 +1,11 @@
-
 import { useState } from 'react'
-import blogService from '../services/blogs'
 
-
-
-
-
-const CreateBlogForm = ({ setBlogs, blogs, setNotifMessage }) => {
+const CreateBlogForm = ({ handleCreateBlog }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
 
-  const handleCreateBlog = async event => {
+  const handler = async event => {
     event.preventDefault()
     const blogObject = {
       title: title,
@@ -19,29 +13,19 @@ const CreateBlogForm = ({ setBlogs, blogs, setNotifMessage }) => {
       url: url
     }
     try {
-      const returnedBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(returnedBlog))
-      setNotifMessage(`a new blog ${title} by ${author} added`)
+      await handleCreateBlog(blogObject)
       setTitle('')
       setAuthor('')
       setUrl('')
-      setTimeout(() => {
-        setNotifMessage(null)
-      }, 5000)
     }
     catch {
-      setNotifMessage('missing title or url')
-      setTimeout(() => {
-        setNotifMessage(null)
-      }, 5000)
     }
   }
-
 
   return (
     <>
       <h2>create new</h2>
-      <form onSubmit={handleCreateBlog}>
+      <form onSubmit={handler}>
         <div>
           <label>
             title:

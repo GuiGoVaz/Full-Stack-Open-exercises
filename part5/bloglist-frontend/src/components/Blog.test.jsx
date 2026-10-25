@@ -27,7 +27,7 @@ const user = {
 const mockHandler1 = vi.fn()
 const mockHandler2 = vi.fn()
 
-describe('<Togglable />', () => {
+describe('<Blog />', () => {
     beforeEach(() => {
 
 

@@ -37,6 +37,9 @@ describe("Blog app", () => {
       await page.getByRole("button", { name: "login" }).click();
 
       await expect(page.getByText("wrong username or password")).toBeVisible();
+      await expect(
+        page.getByText("Matti Luukkainen logged in"),
+      ).not.toBeVisible();
     });
   });
 

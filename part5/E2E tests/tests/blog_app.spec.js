@@ -31,8 +31,11 @@ describe("Blog app", () => {
       await expect(page.getByText("Matti Luukkainen logged in")).toBeVisible();
     });
 
-    //test("fails with wrong credentials", async ({ page }) => {});
+    test("fails with wrong credentials", async ({ page }) => {
+      await page.getByLabel("username").fill("mluukkai");
+      await page.getByRole("button", { name: "login" }).click();
+
+      await expect(page.getByText("wrong username or password")).toBeVisible();
+    });
   });
 });
-
-//test.only

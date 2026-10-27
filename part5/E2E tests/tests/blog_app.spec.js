@@ -128,15 +128,8 @@ describe("Blog app", () => {
 
       test("blogs are arranged in the order according to the likes, with most likes first", async ({
         page,
-        request,
       }) => {
-        await request.post("http://localhost:3003/api/users", {
-          data: {
-            name: "Matti Luukkainen2",
-            username: "mluukkai2",
-            password: "salainen2",
-          },
-        });
+        await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
 
         await page
           .getByText("Matti Luukkainen logged in")

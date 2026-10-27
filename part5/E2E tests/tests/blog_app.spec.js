@@ -46,17 +46,17 @@ describe("Blog app", () => {
     });
 
     test("a new blog can be created", async ({ page }) => {
-      await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
+      await createBlog(page, "testTitle1", "testAuthor1", "testUrl1.com");
 
       await expect(
-        page.getByText("a new blog testTitle by testAuthor added"),
+        page.getByText("a new blog testTitle1 by testAuthor1 added"),
       ).toBeVisible();
-      await expect(page.getByText("testTitle testAuthor")).toBeVisible();
+      await expect(page.getByText("testTitle1 testAuthor1")).toBeVisible();
     });
 
     describe("and several blogs exists", () => {
       beforeEach(async ({ page }) => {
-        await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
+        await createBlog(page, "testTitle1", "testAuthor1", "testUrl1.com");
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
       });
       test("a new blog can be liked", async ({ page }) => {
@@ -129,10 +129,13 @@ describe("Blog app", () => {
       test.only("blogs are arranged in the order according to the likes, with most likes first", async ({
         page,
       }) => {
-        await createBlog(page, "testTitle3", "testAuthor3", "testUrl.com3");
+        await createBlog(page, "testTitle3", "testAuthor3", "testUrl3.com");
         const blogLocator = page.locator(".blog");
 
         await expect(blogLocator).toHaveCount(3);
+        await expect(blogLocator.nth(0)).toContainText("testTitle12");
+        await expect(blogLocator.nth(1)).toContainText("testTitle2");
+        await expect(blogLocator.nth(2)).toContainText("testTitle3");
 
         await page
           .getByText("testTitle2 testAuthor2")
@@ -166,7 +169,7 @@ describe("Blog app", () => {
 
         await expect(blogLocator.nth(0)).toContainText("testTitle3");
         await expect(blogLocator.nth(1)).toContainText("testTitle2");
-        await expect(blogLocator.nth(0)).toContainText("testTitle");
+        await expect(blogLocator.nth(2)).toContainText("testTitle1");
       });
     });
   });

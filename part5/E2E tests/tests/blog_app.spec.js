@@ -10,6 +10,8 @@ describe("Blog app", () => {
     await expect(locator).toBeVisible();
     await expect(page.getByText("username")).toBeVisible();
     await expect(page.getByText("password")).toBeVisible();
+    await expect(page.getByLabel("username")).toBeVisible();
+    await expect(page.getByLabel("password")).toBeVisible();
     await expect(page.getByRole("button", { name: "login" })).toBeVisible();
   });
 });

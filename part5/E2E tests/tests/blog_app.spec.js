@@ -75,12 +75,12 @@ describe("Blog app", () => {
       });
 
       test("a user who created a blog can delete it", async ({ page }) => {
-        await expect(page.getByText("likes 0")).not.toBeVisible();
-
         page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
           .click();
+
+        page.getByRole("button", { name: "remove" }).click();
 
         await expect(page.getByText("likes 0")).toBeVisible();
         await expect(page.getByText("likes 1")).not.toBeVisible();

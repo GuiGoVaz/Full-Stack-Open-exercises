@@ -130,6 +130,9 @@ describe("Blog app", () => {
         page,
       }) => {
         await createBlog(page, "testTitle3", "testAuthor3", "testUrl.com3");
+        const blogLocator = page.locator(".blog");
+
+        await expect(blogLocator).toHaveCount(3);
 
         await page
           .getByText("testTitle2 testAuthor2")
@@ -160,6 +163,10 @@ describe("Blog app", () => {
           .getByText("testTitle3 testAuthor3")
           .getByRole("button", { name: "hide" })
           .click(); ////like the third blog two times
+
+        await expect(blogLocator.nth(0)).toContainText("testTitle3");
+        await expect(blogLocator.nth(1)).toContainText("testTitle2");
+        await expect(blogLocator.nth(0)).toContainText("testTitle");
       });
     });
   });

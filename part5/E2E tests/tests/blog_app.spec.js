@@ -28,6 +28,7 @@ describe("Blog app", () => {
       await page.getByLabel("username").fill("mluukkai");
       await page.getByLabel("password").fill("salainen");
       await page.getByRole("button", { name: "login" }).click();
+      await loginWith(page, "mluukkai", "salainen");
 
       await expect(page.getByText("Matti Luukkainen logged in")).toBeVisible();
     });
@@ -36,6 +37,7 @@ describe("Blog app", () => {
       await page.getByLabel("username").fill("mluukkai");
       await page.getByLabel("password").fill("wrong");
       await page.getByRole("button", { name: "login" }).click();
+      await loginWith(page, "mluukkai", "wrong");
 
       await expect(page.getByText("wrong username or password")).toBeVisible();
       await expect(
@@ -49,6 +51,7 @@ describe("Blog app", () => {
       await page.getByLabel("username").fill("mluukkai");
       await page.getByLabel("password").fill("salainen");
       await page.getByRole("button", { name: "login" }).click();
+      await loginWith(page, "mluukkai", "salainen");
     });
 
     test.only("a new blog can be created", async ({ page }) => {

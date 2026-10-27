@@ -33,6 +33,7 @@ describe("Blog app", () => {
 
     test("fails with wrong credentials", async ({ page }) => {
       await page.getByLabel("username").fill("mluukkai");
+      await page.getByLabel("password").fill("wrong");
       await page.getByRole("button", { name: "login" }).click();
 
       await expect(page.getByText("wrong username or password")).toBeVisible();

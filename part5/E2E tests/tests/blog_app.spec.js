@@ -80,6 +80,16 @@ describe("Blog app", () => {
           .getByRole("button", { name: "view" })
           .click();
 
+        page.once("dialog", async (dialog) => {
+          expect(dialog.type()).toBe("confirm");
+          expect(dialog.message()).toBe(
+            "Are you sure you want to delete this?",
+          );
+
+          // Click "OK"
+          await dialog.accept();
+        });
+
         page.getByRole("button", { name: "remove" }).click();
 
         await expect(page.getByText("likes 0")).toBeVisible();

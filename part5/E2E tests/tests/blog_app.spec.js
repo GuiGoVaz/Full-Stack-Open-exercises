@@ -50,7 +50,7 @@ describe("Blog app", () => {
       await page.getByRole("button", { name: "login" }).click();
     });
 
-    test("a new blog can be created", async ({ page }) => {
+    test.only("a new blog can be created", async ({ page }) => {
       await page.getByRole("button", { name: "create new blog" }).click();
       await page.getByLabel("title").fill("testTitle");
       await page.getByLabel("author").fill("testAuthor");
@@ -60,6 +60,7 @@ describe("Blog app", () => {
       await expect(
         page.getByText("a new blog testTitle by testAuthor added"),
       ).toBeVisible();
+      await expect(page.getByText("testTitle testAuthor")).toBeVisible();
     });
   });
 });

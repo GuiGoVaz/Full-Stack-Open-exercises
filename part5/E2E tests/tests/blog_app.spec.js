@@ -47,7 +47,7 @@ describe("Blog app", () => {
     });
 
     test("a new blog can be created", async ({ page }) => {
-      // ...
+      await page.getByRole("button", { name: "create new blog" }).click();
     });
   });
 });

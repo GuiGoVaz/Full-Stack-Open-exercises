@@ -57,11 +57,9 @@ describe("Blog app", () => {
     describe("and several blogs exists", () => {
       beforeEach(async ({ page }) => {
         await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
-        await page.getByText("testTitle").waitFor();
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
-        await page.getByText("testTitle2").waitFor();
       });
-      test.only("a new blog can be liked", async ({ page }) => {
+      test("a new blog can be liked", async ({ page }) => {
         await expect(page.getByText("likes 0")).not.toBeVisible();
 
         await page

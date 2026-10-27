@@ -5,6 +5,7 @@ const createBlog = async (page, title, author, url) => {
   await page.getByLabel("url").fill(url);
   await page.getByRole("button", { name: "create" }).click();
   await page.getByRole("button", { name: "cancel" }).click();
+  await page.getByText(`${title} ${author}`).waitFor();
 };
 
 const loginWith = async (page, username, password) => {

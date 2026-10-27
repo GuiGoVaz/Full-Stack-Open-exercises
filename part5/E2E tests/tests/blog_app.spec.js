@@ -126,7 +126,7 @@ describe("Blog app", () => {
         await expect(page.getByText("remove")).not.toBeVisible();
       });
 
-      test("blogs are arranged in the order according to the likes, with most likes first", async ({
+      test.only("blogs are arranged in the order according to the likes, with most likes first", async ({
         page,
       }) => {
         await createBlog(page, "testTitle3", "testAuthor3", "testUrl.com3");
@@ -142,7 +142,7 @@ describe("Blog app", () => {
         await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "hide" })
-          .click();
+          .click(); //like the second blog one time
 
         await page
           .getByText("testTitle3 testAuthor3")
@@ -159,7 +159,7 @@ describe("Blog app", () => {
         await page
           .getByText("testTitle3 testAuthor3")
           .getByRole("button", { name: "hide" })
-          .click();
+          .click(); ////like the third blog two times
       });
     });
   });

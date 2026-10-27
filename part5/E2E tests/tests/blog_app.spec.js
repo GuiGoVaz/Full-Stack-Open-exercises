@@ -24,7 +24,7 @@ describe("Blog app", () => {
 });
 
 describe("Login", () => {
-  test.only("succeeds with correct credentials", async ({ page }) => {
+  test("succeeds with correct credentials", async ({ page }) => {
     await page.getByLabel("username").fill("mluukkai");
     await page.getByLabel("password").fill("salainen");
     await page.getByRole("button", { name: "login" }).click();
@@ -32,7 +32,7 @@ describe("Login", () => {
     await expect(page.getByText("Matti Luukkainen logged in")).toBeVisible();
   });
 
-  test("fails with wrong credentials", async ({ page }) => {});
+  //test("fails with wrong credentials", async ({ page }) => {});
 });
 
 //test.only

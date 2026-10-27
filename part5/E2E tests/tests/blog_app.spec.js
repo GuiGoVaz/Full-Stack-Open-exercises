@@ -75,7 +75,7 @@ describe("Blog app", () => {
       });
 
       test.only("a user who created a blog can delete it", async ({ page }) => {
-        page
+        await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
           .click();
@@ -89,7 +89,7 @@ describe("Blog app", () => {
           await dialog.accept();
         });
 
-        page.getByRole("button", { name: "remove" }).click();
+        await page.getByRole("button", { name: "remove" }).click();
 
         await expect(
           page.getByText("testTitle2 testAuthor2"),

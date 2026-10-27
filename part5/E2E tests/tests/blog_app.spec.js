@@ -51,10 +51,10 @@ describe("Blog app", () => {
       await page.getByRole("button", { name: "login" }).click();
     });
 
-    test("a new blog can be created", async ({ page }) => {
+    test.only("a new blog can be created", async ({ page }) => {
       await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
-      await page.getByRole("button", { name: "create new blog" }).click();
-      /* await page.getByLabel("title").fill("testTitle");
+      /* await page.getByRole("button", { name: "create new blog" }).click();
+      await page.getByLabel("title").fill("testTitle");
       await page.getByLabel("author").fill("testAuthor");
       await page.getByLabel("url").fill("testUrl.com");
       await page.getByRole("button", { name: "create" }).click(); */
@@ -67,8 +67,8 @@ describe("Blog app", () => {
 
     describe("and several blogs exists", () => {
       beforeEach(async ({ page }) => {
-        await createNote(page, "first note");
-        await createNote(page, "second note");
+        await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
+        await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
       });
       test("a new blog can be created", async ({ page }) => {
         await page.getByRole("button", { name: "create new blog" }).click();

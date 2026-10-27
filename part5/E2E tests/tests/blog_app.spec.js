@@ -38,4 +38,16 @@ describe("Blog app", () => {
       await expect(page.getByText("wrong username or password")).toBeVisible();
     });
   });
+
+  describe("When logged in", () => {
+    beforeEach(async ({ page }) => {
+      await page.getByLabel("username").fill("mluukkai");
+      await page.getByLabel("password").fill("salainen");
+      await page.getByRole("button", { name: "login" }).click();
+    });
+
+    test("a new blog can be created", async ({ page }) => {
+      // ...
+    });
+  });
 });

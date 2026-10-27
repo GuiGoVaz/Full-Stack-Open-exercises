@@ -1,4 +1,5 @@
 const { test, expect, beforeEach, describe } = require("@playwright/test");
+const { createBlog } = require("./helper");
 
 describe("Blog app", () => {
   beforeEach(async ({ page, request }) => {
@@ -51,6 +52,7 @@ describe("Blog app", () => {
     });
 
     test("a new blog can be created", async ({ page }) => {
+      await createBlog(page, "a note created by playwright");
       await page.getByRole("button", { name: "create new blog" }).click();
       await page.getByLabel("title").fill("testTitle");
       await page.getByLabel("author").fill("testAuthor");

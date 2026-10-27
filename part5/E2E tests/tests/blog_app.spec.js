@@ -98,6 +98,36 @@ describe("Blog app", () => {
           page.getByText("testTitle2 testAuthor2"),
         ).not.toBeVisible();
       });
+
+      test("a user can't delete someone else's blog", async ({ page }) => {
+        await request.post("http://localhost:3003/api/users", {
+          data: {
+            name: "Matti Luukkainen",
+            username: "mluukkai",
+            password: "salainen",
+          },
+        });
+
+        await page
+          .getByText("testTitle2 testAuthor2")
+          .getByRole("button", { name: "view" })
+          .click();
+
+        page.once("dialog", async (dialog) => {
+          expect(dialog.type()).toBe("confirm");
+          expect(dialog.message()).toBe(
+            "Remove blog testTitle2 by testAuthor2",
+          );
+
+          await dialog.accept();
+        });
+
+        await page.getByRole("button", { name: "remove" }).click();
+
+        await expect(
+          page.getByText("testTitle2 testAuthor2"),
+        ).not.toBeVisible();
+      });
     });
   });
 });

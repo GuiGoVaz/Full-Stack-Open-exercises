@@ -126,7 +126,7 @@ describe("Blog app", () => {
         await expect(page.getByText("remove")).not.toBeVisible();
       });
 
-      test("a user can't delete someone else's blog", async ({
+      test("blogs are arranged in the order according to the likes, with most likes first", async ({
         page,
         request,
       }) => {

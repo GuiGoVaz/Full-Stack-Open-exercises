@@ -1,8 +1,8 @@
-const createNote = async (page, content) => {
+const createNote = async (page, title, author, url) => {
   await page.getByRole("button", { name: "create new blog" }).click();
-  await page.getByLabel("title").fill("testTitle");
-  await page.getByLabel("author").fill("testAuthor");
-  await page.getByLabel("url").fill("testUrl.com");
+  await page.getByLabel("title").fill({ title });
+  await page.getByLabel("author").fill({ author });
+  await page.getByLabel("url").fill({ url });
   await page.getByRole("button", { name: "create" }).click();
 };
 

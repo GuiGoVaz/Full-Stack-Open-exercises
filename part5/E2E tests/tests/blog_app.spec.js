@@ -129,21 +129,37 @@ describe("Blog app", () => {
       test("blogs are arranged in the order according to the likes, with most likes first", async ({
         page,
       }) => {
-        await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
-
-        await page
-          .getByText("Matti Luukkainen logged in")
-          .getByRole("button", { name: "logout" })
-          .click();
-
-        await loginWith(page, "mluukkai2", "salainen2");
+        await createBlog(page, "testTitle3", "testAuthor3", "testUrl.com3");
 
         await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
           .click();
+        await page
+          .getByText("likes 0")
+          .getByRole("button", { name: "like" })
+          .click();
+        await page
+          .getByText("testTitle2 testAuthor2")
+          .getByRole("button", { name: "hide" })
+          .click();
 
-        await expect(page.getByText("remove")).not.toBeVisible();
+        await page
+          .getByText("testTitle3 testAuthor3")
+          .getByRole("button", { name: "view" })
+          .click();
+        await page
+          .getByText("likes 0")
+          .getByRole("button", { name: "like" })
+          .click();
+        await page
+          .getByText("likes 1")
+          .getByRole("button", { name: "like" })
+          .click();
+        await page
+          .getByText("testTitle3 testAuthor3")
+          .getByRole("button", { name: "hide" })
+          .click();
       });
     });
   });

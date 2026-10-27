@@ -45,7 +45,7 @@ describe("Blog app", () => {
       await loginWith(page, "mluukkai", "salainen");
     });
 
-    test.only("a new blog can be created", async ({ page }) => {
+    test("a new blog can be created", async ({ page }) => {
       await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
 
       await expect(
@@ -59,12 +59,8 @@ describe("Blog app", () => {
         await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
       });
-      test("a new blog can be created", async ({ page }) => {
-        await page.getByRole("button", { name: "create new blog" }).click();
-        await page.getByLabel("title").fill("testTitle");
-        await page.getByLabel("author").fill("testAuthor");
-        await page.getByLabel("url").fill("testUrl.com");
-        await page.getByRole("button", { name: "create" }).click();
+      test("a new blog can be liked", async ({ page }) => {
+        await createBlog(page, "testTitle3", "testAuthor3", "testUrl3.com");
 
         await expect(
           page.getByText("a new blog testTitle by testAuthor added"),

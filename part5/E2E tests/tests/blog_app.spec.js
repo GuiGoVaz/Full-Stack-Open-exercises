@@ -63,17 +63,23 @@ describe("Blog app", () => {
       await expect(page.getByText("testTitle testAuthor")).toBeVisible();
     });
 
-    test("a new blog can be created", async ({ page }) => {
-      await page.getByRole("button", { name: "create new blog" }).click();
-      await page.getByLabel("title").fill("testTitle");
-      await page.getByLabel("author").fill("testAuthor");
-      await page.getByLabel("url").fill("testUrl.com");
-      await page.getByRole("button", { name: "create" }).click();
+    describe("and several blogs exists", () => {
+      beforeEach(async ({ page }) => {
+        await createNote(page, "first note");
+        await createNote(page, "second note");
+      });
+      test("a new blog can be created", async ({ page }) => {
+        await page.getByRole("button", { name: "create new blog" }).click();
+        await page.getByLabel("title").fill("testTitle");
+        await page.getByLabel("author").fill("testAuthor");
+        await page.getByLabel("url").fill("testUrl.com");
+        await page.getByRole("button", { name: "create" }).click();
 
-      await expect(
-        page.getByText("a new blog testTitle by testAuthor added"),
-      ).toBeVisible();
-      await expect(page.getByText("testTitle testAuthor")).toBeVisible();
+        await expect(
+          page.getByText("a new blog testTitle by testAuthor added"),
+        ).toBeVisible();
+        await expect(page.getByText("testTitle testAuthor")).toBeVisible();
+      });
     });
   });
 });

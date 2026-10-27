@@ -62,16 +62,10 @@ describe("Blog app", () => {
       test.only("a new blog can be liked", async ({ page }) => {
         page
           .getByText("testTitle2 testAuthor2")
-          .getByText("view")
-          .toBeVisible();
-        page
-          .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
           .click();
 
-        await expect(
-          page.getByText("testTitle2 testAuthor2").getByText("likes 0 like"),
-        ).toBeVisible();
+        await expect(page.getByText("likes 0 like")).toBeVisible();
 
         page
           .getByText("testTitle2 testAuthor2")

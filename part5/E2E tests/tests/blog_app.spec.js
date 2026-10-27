@@ -62,7 +62,7 @@ describe("Blog app", () => {
       test("a new blog can be liked", async ({ page }) => {
         await expect(page.getByText("likes 0")).not.toBeVisible();
 
-        page
+        await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
           .click();
@@ -70,11 +70,14 @@ describe("Blog app", () => {
         await expect(page.getByText("likes 0")).toBeVisible();
         await expect(page.getByText("likes 1")).not.toBeVisible();
 
-        page.getByText("likes 0").getByRole("button", { name: "like" }).click();
+        await page
+          .getByText("likes 0")
+          .getByRole("button", { name: "like" })
+          .click();
         await expect(page.getByText("likes 1")).toBeVisible();
       });
 
-      test.only("a user who created a blog can delete it", async ({ page }) => {
+      test("a user who created a blog can delete it", async ({ page }) => {
         await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })

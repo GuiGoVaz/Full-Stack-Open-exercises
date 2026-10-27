@@ -71,7 +71,7 @@ describe("Blog app", () => {
         await expect(page.getByText("likes 1")).not.toBeVisible();
 
         page.getByText("likes 0").getByRole("button", { name: "like" }).click();
-        await expect(page.getByText("likes 1 like")).toBeVisible();
+        await expect(page.getByText("likes 1")).toBeVisible();
       });
     });
   });

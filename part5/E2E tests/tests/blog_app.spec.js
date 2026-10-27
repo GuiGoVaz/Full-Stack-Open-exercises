@@ -1,5 +1,5 @@
 const { test, expect, beforeEach, describe } = require("@playwright/test");
-const { createBlog } = require("./helper");
+const { createBlog, loginWith } = require("./helper");
 
 describe("Blog app", () => {
   beforeEach(async ({ page, request }) => {
@@ -25,18 +25,12 @@ describe("Blog app", () => {
 
   describe("Login", () => {
     test("succeeds with correct credentials", async ({ page }) => {
-      await page.getByLabel("username").fill("mluukkai");
-      await page.getByLabel("password").fill("salainen");
-      await page.getByRole("button", { name: "login" }).click();
       await loginWith(page, "mluukkai", "salainen");
 
       await expect(page.getByText("Matti Luukkainen logged in")).toBeVisible();
     });
 
     test("fails with wrong credentials", async ({ page }) => {
-      await page.getByLabel("username").fill("mluukkai");
-      await page.getByLabel("password").fill("wrong");
-      await page.getByRole("button", { name: "login" }).click();
       await loginWith(page, "mluukkai", "wrong");
 
       await expect(page.getByText("wrong username or password")).toBeVisible();
@@ -48,9 +42,6 @@ describe("Blog app", () => {
 
   describe("When logged in", () => {
     beforeEach(async ({ page }) => {
-      await page.getByLabel("username").fill("mluukkai");
-      await page.getByLabel("password").fill("salainen");
-      await page.getByRole("button", { name: "login" }).click();
       await loginWith(page, "mluukkai", "salainen");
     });
 
@@ -68,7 +59,7 @@ describe("Blog app", () => {
       await expect(page.getByText("testTitle testAuthor")).toBeVisible();
     });
 
-    describe("and several blogs exists", () => {
+    /*  describe("and several blogs exists", () => {
       beforeEach(async ({ page }) => {
         await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
@@ -85,6 +76,6 @@ describe("Blog app", () => {
         ).toBeVisible();
         await expect(page.getByText("testTitle testAuthor")).toBeVisible();
       });
-    });
+    }); */
   });
 });

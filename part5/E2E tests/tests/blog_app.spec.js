@@ -59,14 +59,22 @@ describe("Blog app", () => {
         await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
       });
-      test("a new blog can be liked", async ({ page }) => {
+      test.only("a new blog can be liked", async ({ page }) => {
         page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
-          .click();
+          .toBeVisible(); //.click();
 
         await expect(
-          page.getByText("first note").getByText("make important"),
+          page.getByText("testTitle2 testAuthor2").getByText("likes 0 like"),
+        ).toBeVisible();
+
+        page
+          .getByText("testTitle2 testAuthor2")
+          .getByRole("button", { name: "like" })
+          .click();
+        await expect(
+          page.getByText("testTitle2 testAuthor2").getByText("likes 1 like"),
         ).toBeVisible();
       });
     });

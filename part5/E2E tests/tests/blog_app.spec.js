@@ -99,7 +99,10 @@ describe("Blog app", () => {
         ).not.toBeVisible();
       });
 
-      test("a user can't delete someone else's blog", async ({ page }) => {
+      test("a user can't delete someone else's blog", async ({
+        page,
+        request,
+      }) => {
         await request.post("http://localhost:3003/api/users", {
           data: {
             name: "Matti Luukkainen2",
@@ -113,27 +116,41 @@ describe("Blog app", () => {
           .getByRole("button", { name: "logout" })
           .click();
 
-        await loginWith(page, "mluukkai", "salainen");
+        await loginWith(page, "mluukkai2", "salainen2");
 
         await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
           .click();
 
-        page.once("dialog", async (dialog) => {
-          expect(dialog.type()).toBe("confirm");
-          expect(dialog.message()).toBe(
-            "Remove blog testTitle2 by testAuthor2",
-          );
+        await expect(page.getByText("remove")).not.toBeVisible();
+      });
 
-          await dialog.accept();
+      test("a user can't delete someone else's blog", async ({
+        page,
+        request,
+      }) => {
+        await request.post("http://localhost:3003/api/users", {
+          data: {
+            name: "Matti Luukkainen2",
+            username: "mluukkai2",
+            password: "salainen2",
+          },
         });
 
-        await page.getByRole("button", { name: "remove" }).click();
+        await page
+          .getByText("Matti Luukkainen logged in")
+          .getByRole("button", { name: "logout" })
+          .click();
 
-        await expect(
-          page.getByText("testTitle2 testAuthor2"),
-        ).not.toBeVisible();
+        await loginWith(page, "mluukkai2", "salainen2");
+
+        await page
+          .getByText("testTitle2 testAuthor2")
+          .getByRole("button", { name: "view" })
+          .click();
+
+        await expect(page.getByText("remove")).not.toBeVisible();
       });
     });
   });

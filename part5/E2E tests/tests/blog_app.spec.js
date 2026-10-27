@@ -8,10 +8,10 @@ describe("Blog app", () => {
   test("Login form is shown", async ({ page }) => {
     const locator = page.getByText("Log in to application");
     await expect(locator).toBeVisible();
-    await expect(page.getByText("username")).toBeVisible();
-    await expect(page.getByText("password")).toBeVisible();
     await expect(page.getByLabel("username")).toBeVisible();
     await expect(page.getByLabel("password")).toBeVisible();
     await expect(page.getByRole("button", { name: "login" })).toBeVisible();
   });
 });
+
+//test.only

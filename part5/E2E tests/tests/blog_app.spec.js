@@ -47,11 +47,6 @@ describe("Blog app", () => {
 
     test.only("a new blog can be created", async ({ page }) => {
       await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
-      /* await page.getByRole("button", { name: "create new blog" }).click();
-      await page.getByLabel("title").fill("testTitle");
-      await page.getByLabel("author").fill("testAuthor");
-      await page.getByLabel("url").fill("testUrl.com");
-      await page.getByRole("button", { name: "create" }).click(); */
 
       await expect(
         page.getByText("a new blog testTitle by testAuthor added"),
@@ -59,7 +54,7 @@ describe("Blog app", () => {
       await expect(page.getByText("testTitle testAuthor")).toBeVisible();
     });
 
-    /*  describe("and several blogs exists", () => {
+    describe("and several blogs exists", () => {
       beforeEach(async ({ page }) => {
         await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
@@ -76,6 +71,6 @@ describe("Blog app", () => {
         ).toBeVisible();
         await expect(page.getByText("testTitle testAuthor")).toBeVisible();
       });
-    }); */
+    });
   });
 });

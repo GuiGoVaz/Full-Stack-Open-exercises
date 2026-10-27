@@ -102,11 +102,18 @@ describe("Blog app", () => {
       test("a user can't delete someone else's blog", async ({ page }) => {
         await request.post("http://localhost:3003/api/users", {
           data: {
-            name: "Matti Luukkainen",
-            username: "mluukkai",
-            password: "salainen",
+            name: "Matti Luukkainen2",
+            username: "mluukkai2",
+            password: "salainen2",
           },
         });
+
+        await page
+          .getByText("Matti Luukkainen logged in")
+          .getByRole("button", { name: "logout" })
+          .click();
+
+        await loginWith(page, "mluukkai", "salainen");
 
         await page
           .getByText("testTitle2 testAuthor2")

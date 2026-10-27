@@ -54,18 +54,19 @@ describe("Blog app", () => {
       await expect(page.getByText("testTitle testAuthor")).toBeVisible();
     });
 
+    test("a new blog can be liked", async ({ page }) => {
+      await createBlog(page, "testTitle3", "testAuthor3", "testUrl3.com");
+
+      await expect(
+        page.getByText("a new blog testTitle by testAuthor added"),
+      ).toBeVisible();
+      await expect(page.getByText("testTitle testAuthor")).toBeVisible();
+    });
+
     describe("and several blogs exists", () => {
       beforeEach(async ({ page }) => {
         await createBlog(page, "testTitle", "testAuthor", "testUrl.com");
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
-      });
-      test("a new blog can be liked", async ({ page }) => {
-        await createBlog(page, "testTitle3", "testAuthor3", "testUrl3.com");
-
-        await expect(
-          page.getByText("a new blog testTitle by testAuthor added"),
-        ).toBeVisible();
-        await expect(page.getByText("testTitle testAuthor")).toBeVisible();
       });
     });
   });

@@ -60,12 +60,15 @@ describe("Blog app", () => {
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
       });
       test.only("a new blog can be liked", async ({ page }) => {
+        await expect(page.getByText("likes 0")).not.toBeVisible();
+
         page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
           .click();
 
         await expect(page.getByText("likes 0")).toBeVisible();
+        await expect(page.getByText("likes 1")).not.toBeVisible();
 
         page.getByText("likes 0").getByRole("button", { name: "like" }).click();
         await expect(page.getByText("likes 1 like")).toBeVisible();

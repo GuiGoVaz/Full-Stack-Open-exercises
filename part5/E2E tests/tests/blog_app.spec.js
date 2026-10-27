@@ -65,15 +65,10 @@ describe("Blog app", () => {
           .getByRole("button", { name: "view" })
           .click();
 
-        await expect(page.getByText("likes 0 like")).toBeVisible();
+        await expect(page.getByText("likes 0")).toBeVisible();
 
-        page
-          .getByText("testTitle2 testAuthor2")
-          .getByRole("button", { name: "like" })
-          .click();
-        await expect(
-          page.getByText("testTitle2 testAuthor2").getByText("likes 1 like"),
-        ).toBeVisible();
+        page.getByText("likes 0").getByRole("button", { name: "like" }).click();
+        await expect(page.getByText("likes 1 like")).toBeVisible();
       });
     });
   });

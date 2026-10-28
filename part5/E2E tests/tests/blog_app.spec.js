@@ -126,14 +126,14 @@ describe("Blog app", () => {
         await expect(page.getByText("remove")).not.toBeVisible();
       });
 
-      test.only("blogs are arranged in the order according to the likes, with most likes first", async ({
+      test("blogs are arranged in the order according to the likes, with most likes first", async ({
         page,
       }) => {
         await createBlog(page, "testTitle3", "testAuthor3", "testUrl3.com");
         const blogLocator = page.locator(".blog");
 
         await expect(blogLocator).toHaveCount(3);
-        await expect(blogLocator.nth(0)).toContainText("testTitle12");
+        await expect(blogLocator.nth(0)).toContainText("testTitle1");
         await expect(blogLocator.nth(1)).toContainText("testTitle2");
         await expect(blogLocator.nth(2)).toContainText("testTitle3");
 

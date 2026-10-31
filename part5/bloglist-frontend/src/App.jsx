@@ -1,81 +1,85 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
 import blogService from './services/blogs'
-import loginService from './services/login'
+import BlogsPage from './components/BlogsPage'
+import {
+  Routes, Route, Link, useMatch
+} from 'react-router-dom'
+import LoginPage from './components/LoginPage'
+import Blog from "./components/Blog"
+import CreateBlogForm from './components/CreateBlogForm'
+import { useNavigate } from 'react-router-dom'
+
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+
+
   const [user, setUser] = useState(null)
+  const [notifMessage, setNotifMessage] = useState(null)
+  const [blogs, setBlogs] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
   }, [])
 
-  const handleLogin = async event => {
-    event.preventDefault()
+  const padding = {
+    padding: 5
+  }
+  const match = useMatch('/blogs/:id')
+  const blog = match
+    ? blogs.find(blog => blog.id === match.params.id)
+    : null
+
+  const logout = () => {
+    window.localStorage.removeItem('loggedBlogappUser')
+    setUser(null)
+  }
+  const handleCreateBlog = async (blogObject) => {
 
     try {
-      const user = await loginService.login({ username, password })
-      setUser(user)
-      setUsername('')
-      setPassword('')
-    } catch {
-      /* setErrorMessage('wrong credentials')
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+      setNotifMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
+      navigate('/')
       setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000) */
+        setNotifMessage(null)
+      }, 5000)
+    }
+    catch {
+      setNotifMessage('missing title or url')
+      setTimeout(() => {
+        setNotifMessage(null)
+      }, 5000)
+      throw new Error("missing title or url");
     }
   }
-
-  const loginForm = () => (
-    <><h2>Log in to application</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>
-            username
-            <input
-              type="text"
-              value={username}
-              onChange={({ target }) => setUsername(target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            password
-            <input
-              type="password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit">login</button>
-      </form></>
-  )
-
-  const blogForm = () => (
-    <>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}</>
-  )
-
   return (
-    <div>
-
-      {!user && loginForm()}
-      {user && (
-        <div><h2>blogs</h2>
-          <p>{user.name} logged in</p>
-          {blogForm()}
-        </div>)}
-
-    </div>
+    <>
+      <div>
+        <Link style={padding} to="/">blogs</Link>
+        <Link style={padding} to="/create">new blog</Link>
+        {!user && (<Link style={padding} to="/login">login</Link>)}
+        {user && (<button onClick={logout}>
+          logout
+        </button>)}
+      </div>
+      <Routes>
+        <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
+        } />
+        <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} notifMessage={notifMessage} setNotifMessage={setNotifMessage} />} />
+        <Route path="/create" element={
+          <CreateBlogForm handleCreateBlog={handleCreateBlog} />
+        } />
+        <Route path="/blogs/:id" element={
+          <Blog blog={blog} user={user} setUser={setUser} blogs={blogs} setBlogs={setBlogs} />
+        } />
+      </Routes>
+    </>
   )
 }
 

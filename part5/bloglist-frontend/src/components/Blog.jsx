@@ -1,7 +1,84 @@
-const Blog = ({ blog }) => (
-  <div>
-    {blog.title} {blog.author}
-  </div>  
-)
+import { useEffect } from 'react'
+import blogService from '../services/blogs'
+import { useNavigate } from 'react-router-dom'
+
+
+
+
+const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    blogService.getAll().then(blogs =>
+      setBlogs(blogs)
+    )
+  }, [])
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
+
+  const handleBlogUpdate = (updatedBlog) => {
+    setBlogs(prevBlogs =>
+      prevBlogs.map(blog =>
+        blog.id === updatedBlog.id ? updatedBlog : blog
+      )
+    )
+  }
+
+  const handleLike = async (blog) => {
+    const updatedBlog = { ...blog }
+    updatedBlog.likes = updatedBlog.likes + 1
+    updatedBlog.user = updatedBlog.user.id
+    const response = await blogService.update(blog.id, updatedBlog)
+    handleBlogUpdate(response)
+  }
+
+  const handleBlogDelete = (idToDelete) => {
+    setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== idToDelete))
+  }
+  const handleRemove = async (blog) => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      await blogService.remove(blog.id)
+      handleBlogDelete(blog.id)
+      navigate('/')
+    }
+  }
+  if (!blog) {
+    return null
+  }
+
+  return (
+
+    <div><h2>{`${blog.author}: ${blog.title}`}</h2>
+      <a href={blog.url}>{blog.url}</a>
+      {!user && (<div>likes {blog.likes}</div>)}
+      {user && (<div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
+        like
+      </button></div>)}
+      <div>Added by {blog.user?.name}</div>
+      {user && (user.username === blog.user.username) && (<button style={{
+        borderRadius: '4px',
+        border: '1px solid #1367ba',
+        background: 'linear-gradient(to bottom, #80ccff 0%, #33adff 45%, #0088cc 50%, #0099ff 100%)',
+      }} onClick={() => handleRemove(blog)}>
+        remove
+      </button>)}
+
+    </div>
+
+
+
+
+
+  )
+}
 
 export default Blog
+
+

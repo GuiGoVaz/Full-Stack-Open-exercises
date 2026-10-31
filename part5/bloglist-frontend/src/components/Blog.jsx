@@ -20,7 +20,8 @@ const Blog = ({ blog, user, handleLike, handleRemove }) => {
   return (
 
     <div>
-      {`${blog.title} by ${blog.author}`}
+      <Link to={`/blogs/${blog.id}`}>{`${blog.title} by ${blog.author}`}</Link>
+
       <button onClick={() => setVisible(!visible)}>
         {visible ? 'hide' : 'view'}
       </button>

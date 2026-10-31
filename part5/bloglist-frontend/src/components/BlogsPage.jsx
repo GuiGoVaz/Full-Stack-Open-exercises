@@ -9,9 +9,9 @@ import BlogForm from "./BlogForm"
 
 
 
-const BlogsPage = ({ user, blogs, setBlogs }) => {
+const BlogsPage = ({ user, blogs, setBlogs, notifMessage, setNotifMessage }) => {
 
-  const [notifMessage, setNotifMessage] = useState(null)
+
   //const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -36,24 +36,7 @@ const BlogsPage = ({ user, blogs, setBlogs }) => {
 
 
 
-  const handleCreateBlog = async (blogObject) => {
 
-    try {
-      const returnedBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(returnedBlog))
-      setNotifMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
-      setTimeout(() => {
-        setNotifMessage(null)
-      }, 5000)
-    }
-    catch {
-      setNotifMessage('missing title or url')
-      setTimeout(() => {
-        setNotifMessage(null)
-      }, 5000)
-      throw new Error("missing title or url");
-    }
-  }
 
 
 
@@ -62,10 +45,6 @@ const BlogsPage = ({ user, blogs, setBlogs }) => {
 
     <div><h2>blogs</h2>
       <Notification message={notifMessage} />
-
-      <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
-        <CreateBlogForm handleCreateBlog={handleCreateBlog} />
-      </Togglable>
       <BlogForm blogs={blogs} />
     </div>
 

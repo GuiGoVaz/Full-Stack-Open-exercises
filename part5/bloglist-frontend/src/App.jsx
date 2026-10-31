@@ -126,12 +126,16 @@ const App = () => {
     }
   }
 
+  const padding = {
+    padding: 5
+  }
+
   return (
     <Router>
       <div>
-        <Link style={padding} to="/">home</Link>
-        <Link style={padding} to="/notes">notes</Link>
-        <Link style={padding} to="/create">new note</Link>
+        <Link style={padding} to="/">blogs</Link>
+        <Link style={padding} to="/login">login</Link>
+
       </div>
 
       <Routes>

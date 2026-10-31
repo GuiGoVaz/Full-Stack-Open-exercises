@@ -11,6 +11,14 @@ const Blog = ({ blog, user, blogs, setBlogs }) => {
       setBlogs(blogs)
     )
   }, [])
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
 
 
   const handleBlogUpdate = (updatedBlog) => {

@@ -58,8 +58,12 @@ const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
       {user && (<div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
         like
       </button></div>)}
+      <div>Added by {blog.user?.name}</div>
+
 
     </div>
+
+
 
 
 

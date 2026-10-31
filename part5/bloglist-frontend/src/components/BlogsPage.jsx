@@ -1,7 +1,5 @@
 import Notification from "./Notification"
-import Togglable from "./Togglable"
-import CreateBlogForm from "./CreateBlogForm"
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import blogService from '../services/blogs'
 import BlogForm from "./BlogForm"
 
@@ -12,7 +10,7 @@ import BlogForm from "./BlogForm"
 const BlogsPage = ({ user, blogs, setBlogs, notifMessage, setNotifMessage }) => {
 
 
-  //const [user, setUser] = useState(null)
+
 
   useEffect(() => {
     blogService.getAll().then(blogs =>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import blogService from './services/blogs'
 import BlogsPage from './components/BlogsPage'
 import {
-  BrowserRouter as Router,
   Routes, Route, Link, useMatch
 } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
@@ -13,8 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 const App = () => {
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
   const [blogs, setBlogs] = useState([])

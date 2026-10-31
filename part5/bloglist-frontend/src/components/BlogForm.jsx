@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 
 const BlogForm = ({ blogs }) => {
+
   blogs.sort((a, b) => b.likes - a.likes);
   return (
     <ul>

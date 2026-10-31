@@ -66,7 +66,7 @@ const BlogsPage = ({ user, blogs, setBlogs }) => {
       <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
         <CreateBlogForm handleCreateBlog={handleCreateBlog} />
       </Togglable>
-      <BlogForm />
+      <BlogForm blogs={blogs} />
     </div>
 
   )

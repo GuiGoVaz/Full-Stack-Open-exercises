@@ -8,8 +8,8 @@ import blogService from '../services/blogs'
 
 
 
-const BlogsPage = ({ user }) => {
-  const [blogs, setBlogs] = useState([])
+const BlogsPage = ({ user, blogs, setBlogs }) => {
+
   const [notifMessage, setNotifMessage] = useState(null)
   //const [user, setUser] = useState(null)
 
@@ -72,23 +72,7 @@ const BlogsPage = ({ user }) => {
       )
     )
   }
-  const handleLike = async (blog) => {
-    const updatedBlog = { ...blog }
-    updatedBlog.likes = updatedBlog.likes + 1
-    updatedBlog.user = updatedBlog.user.id
-    const response = await blogService.update(blog.id, updatedBlog)
-    handleBlogUpdate(response)
-  }
 
-  const handleBlogDelete = (idToDelete) => {
-    setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== idToDelete))
-  }
-  const handleRemove = async (blog) => {
-    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-      blogService.remove(blog.id)
-      handleBlogDelete(blog.id)
-    }
-  }
   //{loggedIn()}
   return (
 

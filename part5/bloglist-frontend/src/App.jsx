@@ -14,6 +14,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
+  const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -44,7 +45,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
         } />
-        <Route path="/" element={<BlogsPage user={user} />} />
+        <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} />} />
         <Route path="/blogs/:id" element={
           <Blog key={blog.id} blog={blog} user={user} handleLike={handleLike} handleRemove={handleRemove} />
         } />

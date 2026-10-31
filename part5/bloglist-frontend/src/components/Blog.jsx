@@ -4,7 +4,7 @@ import blogService from '../services/blogs'
 
 
 
-const Blog = ({ blog, user, blogs, setBlogs }) => {
+const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -48,6 +48,21 @@ const Blog = ({ blog, user, blogs, setBlogs }) => {
   }
   if (!blog) {
     return null
+  }
+  if (!user) {
+    return (
+
+      <div><h2>{`${blog.author}: ${blog.title}`}</h2>
+        <a href={blog.url}>{blog.url}</a>
+        <div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
+          like
+        </button></div>
+
+      </div>
+
+
+
+    )
   }
   return (
 

@@ -10,6 +10,7 @@ import blogService from '../services/blogs'
 const BlogsPage = () => {
   const [blogs, setBlogs] = useState([])
   const [notifMessage, setNotifMessage] = useState(null)
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -60,12 +61,12 @@ const BlogsPage = () => {
       throw new Error("missing title or url");
     }
   }
-
+  //{loggedIn()}
   return (
 
     <div><h2>blogs</h2>
       <Notification message={notifMessage} />
-      {loggedIn()}
+
       <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
         <CreateBlogForm handleCreateBlog={handleCreateBlog} />
       </Togglable>

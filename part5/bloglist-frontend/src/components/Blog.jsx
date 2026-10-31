@@ -49,28 +49,15 @@ const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
   if (!blog) {
     return null
   }
-  if (!user) {
-    return (
 
-      <div><h2>{`${blog.author}: ${blog.title}`}</h2>
-        <a href={blog.url}>{blog.url}</a>
-        <div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
-          like
-        </button></div>
-
-      </div>
-
-
-
-    )
-  }
   return (
 
     <div><h2>{`${blog.author}: ${blog.title}`}</h2>
       <a href={blog.url}>{blog.url}</a>
-      <div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
+      {!user && (<div>likes {blog.likes}</div>)}
+      {user && (<div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
         like
-      </button></div>
+      </button></div>)}
 
     </div>
 

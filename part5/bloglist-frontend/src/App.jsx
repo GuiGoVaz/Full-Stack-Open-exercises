@@ -7,6 +7,11 @@ import LoginForm from './components/LoginForm'
 import CreateBlogForm from './components/CreateBlogForm'
 import Togglable from './components/Togglable'
 
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
+
 
 
 
@@ -122,19 +127,30 @@ const App = () => {
   }
 
   return (
-    <div>
-      {!user && (<div><LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
-        setUsername={setUsername} password={password} setPassword={setPassword} /> </div>)}
-      {user && (
-        <div><h2>blogs</h2>
-          <Notification message={notifMessage} />
-          {loggedIn()}
-          <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
-            <CreateBlogForm handleCreateBlog={handleCreateBlog} />
-          </Togglable>
-          {blogForm()}
-        </div>)}
-    </div>
+    <Router>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/create">new note</Link>
+      </div>
+
+      <Routes>
+        <Route path="/notes" element={
+          <NoteList notes={notes} />
+        } />
+        <Route path="/create" element={
+          <NoteForm createNote={addNote} />
+        } />
+        <Route path="/" element={<Home />} />
+      </Routes>
+      <Footer />
+    </Router>
+
+
+
+
+
+
   )
 }
 

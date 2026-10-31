@@ -2,6 +2,7 @@ import Notification from "./Notification"
 import Togglable from "./Togglable"
 import CreateBlogForm from "./CreateBlogForm"
 import { useState, useEffect } from 'react'
+import blogService from '../services/blogs'
 
 
 
@@ -9,6 +10,12 @@ import { useState, useEffect } from 'react'
 const BlogsPage = ({ notifMessage }) => {
   const [blogs, setBlogs] = useState([])
   const [notifMessage, setNotifMessage] = useState(null)
+
+  useEffect(() => {
+    blogService.getAll().then(blogs =>
+      setBlogs(blogs)
+    )
+  }, [])
 
 
 

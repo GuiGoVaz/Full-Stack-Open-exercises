@@ -8,6 +8,8 @@ import {
 import LoginPage from './components/LoginPage'
 import Blog from "./components/Blog"
 import CreateBlogForm from './components/CreateBlogForm'
+import { useNavigate } from 'react-router-dom'
+
 
 const App = () => {
 
@@ -16,6 +18,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
   const [blogs, setBlogs] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -44,6 +47,7 @@ const App = () => {
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
       setNotifMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
+      navigate('/')
       setTimeout(() => {
         setNotifMessage(null)
       }, 5000)

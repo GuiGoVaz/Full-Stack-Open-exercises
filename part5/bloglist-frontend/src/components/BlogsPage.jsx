@@ -7,7 +7,7 @@ import blogService from '../services/blogs'
 
 
 
-const BlogsPage = ({ notifMessage }) => {
+const BlogsPage = () => {
   const [blogs, setBlogs] = useState([])
   const [notifMessage, setNotifMessage] = useState(null)
 

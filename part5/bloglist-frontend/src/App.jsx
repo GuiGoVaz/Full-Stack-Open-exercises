@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
-import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
-import CreateBlogForm from './components/CreateBlogForm'
-import Togglable from './components/Togglable'
+import BlogsPage from './components/BlogsPage'
+
 
 import {
   BrowserRouter as Router,
@@ -16,18 +14,14 @@ import {
 
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
 
 
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
-  }, [])
+
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -82,49 +76,11 @@ const App = () => {
     }
   }
 
-  const loggedIn = () => {
-    const logout = () => {
-      window.localStorage.removeItem('loggedBlogappUser')
-      setUser(null)
-    }
-    return (
-      <p> {user.name} logged in <button onClick={logout} type="submit">
-        logout
-      </button></p>
-    )
-  }
-
-  const blogForm = () => {
-    blogs.sort((a, b) => b.likes - a.likes);
-    return (
-      <>
-        {blogs.map(blog => {
-          return (<Blog key={blog.id} blog={blog} user={user} handleLike={handleLike} handleRemove={handleRemove} />)
-        }
-        )}</>
-    )
-  }
 
 
 
-  const handleCreateBlog = async (blogObject) => {
 
-    try {
-      const returnedBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(returnedBlog))
-      setNotifMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
-      setTimeout(() => {
-        setNotifMessage(null)
-      }, 5000)
-    }
-    catch {
-      setNotifMessage('missing title or url')
-      setTimeout(() => {
-        setNotifMessage(null)
-      }, 5000)
-      throw new Error("missing title or url");
-    }
-  }
+
 
   const padding = {
     padding: 5
@@ -143,16 +99,9 @@ const App = () => {
           <div><LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
             setUsername={setUsername} password={password} setPassword={setPassword} /> </div>
         } />
-        <Route path="/" element={<div><h2>blogs</h2>
-          <Notification message={notifMessage} />
-          {loggedIn()}
-          <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
-            <CreateBlogForm handleCreateBlog={handleCreateBlog} />
-          </Togglable>
-          {blogForm()}
-        </div>)}} />
+        <Route path="/" element={<BlogsPage />} />
       </Routes>
-      <Footer />
+
     </Router>
 
 

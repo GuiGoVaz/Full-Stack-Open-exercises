@@ -32,7 +32,9 @@ const Blog = ({ blog, user, }) => {
       handleBlogDelete(blog.id)
     }
   }
-
+  if (!blog) {
+    return null
+  }
   return (
 
     <div>

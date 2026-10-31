@@ -143,7 +143,14 @@ const App = () => {
           <div><LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
             setUsername={setUsername} password={password} setPassword={setPassword} /> </div>
         } />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<div><h2>blogs</h2>
+          <Notification message={notifMessage} />
+          {loggedIn()}
+          <Togglable buttonLabel="create new blog" buttonLabel2="cancel">
+            <CreateBlogForm handleCreateBlog={handleCreateBlog} />
+          </Togglable>
+          {blogForm()}
+        </div>)}} />
       </Routes>
       <Footer />
     </Router>

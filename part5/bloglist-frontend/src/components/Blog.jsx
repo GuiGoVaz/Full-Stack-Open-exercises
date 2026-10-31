@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
+  const navigate = useNavigate()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>

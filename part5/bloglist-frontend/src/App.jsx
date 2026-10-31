@@ -3,7 +3,7 @@ import blogService from './services/blogs'
 import BlogsPage from './components/BlogsPage'
 import {
   BrowserRouter as Router,
-  Routes, Route, Link
+  Routes, Route, Link, useMatch
 } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
 import Blog from "./components/Blog"
@@ -28,13 +28,17 @@ const App = () => {
   const padding = {
     padding: 5
   }
+  const match = useMatch('/blogs/:id')
+  const blog = match
+    ? blogs.find(blog => blog.id === match.params.id)
+    : null
 
   const logout = () => {
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
   }
   return (
-    <Router>
+    <>
       <div>
         <Link style={padding} to="/">blogs</Link>
         {!user && (<Link style={padding} to="/login">login</Link>)}
@@ -47,10 +51,10 @@ const App = () => {
         } />
         <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} />} />
         <Route path="/blogs/:id" element={
-          <Blog key={blog.id} blog={blog} user={user} handleLike={handleLike} handleRemove={handleRemove} />
+          <Blog key={blog.id} blog={blog} user={user} />
         } />
       </Routes>
-    </Router>
+    </>
   )
 }
 

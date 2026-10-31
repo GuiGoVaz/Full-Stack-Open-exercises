@@ -44,6 +44,9 @@ const App = () => {
         <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
         } />
         <Route path="/" element={<BlogsPage user={user} />} />
+        <Route path="/notes/:id" element={
+          <Note notes={notes} toggleImportanceOf={toggleImportanceOf} />
+        } />
       </Routes>
     </Router>
   )

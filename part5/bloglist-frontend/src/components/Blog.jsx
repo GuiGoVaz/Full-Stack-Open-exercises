@@ -44,7 +44,7 @@ const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
   }
   const handleRemove = async (blog) => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-      blogService.remove(blog.id)
+      await blogService.remove(blog.id)
       handleBlogDelete(blog.id)
       navigate('/')
     }

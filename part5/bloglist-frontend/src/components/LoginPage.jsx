@@ -1,7 +1,7 @@
 import Notification from "./Notification"
 import Togglable from "./Togglable"
 import CreateBlogForm from "./CreateBlogForm"
-import { useState, useEffect } from 'react'
+import LoginForm from './LoginForm'
 import blogService from '../services/blogs'
 import Blog from "./Blog"
 import loginService from '../services/login'
@@ -13,6 +13,9 @@ import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
   const [notifMessage, setNotifMessage] = useState(null)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
 

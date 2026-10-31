@@ -1,16 +1,12 @@
-import { useState } from 'react'
+import Notification from "./Notification"
+import Togglable from "./Togglable"
+import CreateBlogForm from "./CreateBlogForm"
 
 
 
-const BlogsPage = ({ blog, user, handleLike, handleRemove }) => {
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
-  const [visible, setVisible] = useState(false)
+
+const BlogsPage = ({ notifMessage }) => {
+
 
 
   const loggedIn = () => {
@@ -54,9 +50,6 @@ const BlogsPage = ({ blog, user, handleLike, handleRemove }) => {
       throw new Error("missing title or url");
     }
   }
-
-
-
 
   return (
 

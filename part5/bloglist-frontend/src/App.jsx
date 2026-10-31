@@ -71,7 +71,7 @@ const App = () => {
         </button>)}
       </div>
       <Routes>
-        <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
+        <Route path="/login" element={<LoginPage user={user} setUser={setUser} notifMessage={notifMessage} setNotifMessage={setNotifMessage} />
         } />
         <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} notifMessage={notifMessage} setNotifMessage={setNotifMessage} />} />
         <Route path="/create" element={

@@ -8,10 +8,10 @@ import Blog from "./Blog"
 
 
 
-const BlogsPage = () => {
+const BlogsPage = ({ user }) => {
   const [blogs, setBlogs] = useState([])
   const [notifMessage, setNotifMessage] = useState(null)
-  const [user, setUser] = useState(null)
+  //const [user, setUser] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>

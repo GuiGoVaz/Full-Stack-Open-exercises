@@ -60,6 +60,7 @@ const App = () => {
     <>
       <div>
         <Link style={padding} to="/">blogs</Link>
+        <Link style={padding} to="/create">new blog</Link>
         {!user && (<Link style={padding} to="/login">login</Link>)}
         {user && (<button onClick={logout}>
           logout

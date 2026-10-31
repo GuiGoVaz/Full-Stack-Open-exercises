@@ -44,7 +44,10 @@ const App = () => {
       <div>
         <Link style={padding} to="/">blogs</Link>
         <Link style={padding} to="/login">login</Link>
-
+        {!user && (<Link style={padding} to="/login">login</Link>)}
+        {!user && (<button onClick={() => handleLike(blog)}>
+          like
+        </button>)}
       </div>
 
       <Routes>

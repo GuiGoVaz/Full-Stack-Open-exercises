@@ -4,11 +4,14 @@ import CreateBlogForm from "./CreateBlogForm"
 import { useState, useEffect } from 'react'
 import blogService from '../services/blogs'
 import Blog from "./Blog"
+import loginService from '../services/login'
+import { useState, useEffect } from 'react'
 
 
 
 
 const LoginPage = () => {
+  const [notifMessage, setNotifMessage] = useState(null)
 
 
 

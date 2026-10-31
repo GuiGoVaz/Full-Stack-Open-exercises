@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import blogService from '../services/blogs'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -44,6 +45,7 @@ const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
       blogService.remove(blog.id)
       handleBlogDelete(blog.id)
+      navigate('/')
     }
   }
   if (!blog) {

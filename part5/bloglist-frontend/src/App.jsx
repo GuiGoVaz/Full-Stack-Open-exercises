@@ -6,6 +6,7 @@ import {
   Routes, Route, Link
 } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
+import Blog from "./components/Blog"
 
 const App = () => {
 
@@ -44,8 +45,8 @@ const App = () => {
         <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
         } />
         <Route path="/" element={<BlogsPage user={user} />} />
-        <Route path="/notes/:id" element={
-          <Note notes={notes} toggleImportanceOf={toggleImportanceOf} />
+        <Route path="/blogs/:id" element={
+          <Blog key={blog.id} blog={blog} user={user} handleLike={handleLike} handleRemove={handleRemove} />
         } />
       </Routes>
     </Router>

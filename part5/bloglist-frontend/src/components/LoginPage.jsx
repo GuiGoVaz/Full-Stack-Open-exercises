@@ -11,11 +11,10 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const LoginPage = () => {
+const LoginPage = ({ user, setUser }) => {
   const [notifMessage, setNotifMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
 

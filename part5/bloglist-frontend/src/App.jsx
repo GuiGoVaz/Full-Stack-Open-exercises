@@ -1,18 +1,11 @@
 import { useState, useEffect } from 'react'
 import blogService from './services/blogs'
-
-
 import BlogsPage from './components/BlogsPage'
-
-
 import {
   BrowserRouter as Router,
   Routes, Route, Link
 } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
-
-
-
 
 const App = () => {
 
@@ -20,9 +13,6 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notifMessage, setNotifMessage] = useState(null)
-
-
-
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -32,8 +22,6 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-
-
 
   const padding = {
     padding: 5
@@ -52,21 +40,12 @@ const App = () => {
           logout
         </button>)}
       </div>
-
       <Routes>
-        <Route path="/login" element={<LoginPage />
-
+        <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
         } />
         <Route path="/" element={<BlogsPage />} />
       </Routes>
-
     </Router>
-
-
-
-
-
-
   )
 }
 

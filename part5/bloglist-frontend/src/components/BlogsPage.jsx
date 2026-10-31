@@ -36,11 +36,13 @@ const BlogsPage = ({ user }) => {
   const blogForm = () => {
     blogs.sort((a, b) => b.likes - a.likes);
     return (
-      <>
+
+
+      <ul>
         {blogs.map(blog => {
-          return (<Blog key={blog.id} blog={blog} user={user} handleLike={handleLike} handleRemove={handleRemove} />)
+          return (<li><Blog key={blog.id} blog={blog} user={user} handleLike={handleLike} handleRemove={handleRemove} /></li>)
         }
-        )}</>
+        )}</ul>
     )
   }
 

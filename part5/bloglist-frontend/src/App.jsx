@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
         } />
         <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} />} />
-
+        <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} />} />
         <Route path="/blogs/:id" element={
           <Blog blog={blog} user={user} setUser={setUser} blogs={blogs} setBlogs={setBlogs} />
         } />

@@ -6,12 +6,14 @@ import blogService from '../services/blogs'
 import Blog from "./Blog"
 import loginService from '../services/login'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 const LoginPage = () => {
   const [notifMessage, setNotifMessage] = useState(null)
+  const navigate = useNavigate()
 
 
 
@@ -27,6 +29,7 @@ const LoginPage = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      navigate('/')
     } catch {
       setNotifMessage('wrong username or password')
       setTimeout(() => {

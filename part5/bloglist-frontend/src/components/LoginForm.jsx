@@ -2,7 +2,7 @@ import Notification from './Notification'
 import { useNavigate } from 'react-router-dom'
 
 const LoginForm = (props) => {
-  const navigate = useNavigate()
+
   return (
     <><h2>Log in to application</h2>
       <Notification message={props.notifMessage} />

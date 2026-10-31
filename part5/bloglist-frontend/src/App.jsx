@@ -9,6 +9,7 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link
 } from 'react-router-dom'
+import LoginPage from './components/LoginPage'
 
 
 
@@ -32,31 +33,6 @@ const App = () => {
     }
   }, [])
 
-  const handleLogin = async event => {
-    event.preventDefault()
-    try {
-      const user = await loginService.login({ username, password })
-      blogService.setToken(user.token)
-      window.localStorage.setItem(
-        'loggedBlogappUser', JSON.stringify(user)
-      )
-      setUser(user)
-      setUsername('')
-      setPassword('')
-    } catch {
-      setNotifMessage('wrong username or password')
-      setTimeout(() => {
-        setNotifMessage(null)
-      }, 5000)
-    }
-  }
-
-
-
-
-
-
-
 
 
   const padding = {
@@ -72,9 +48,8 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path="/login" element={
-          <div><LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
-            setUsername={setUsername} password={password} setPassword={setPassword} /> </div>
+        <Route path="/login" element={<LoginPage />
+
         } />
         <Route path="/" element={<BlogsPage />} />
       </Routes>

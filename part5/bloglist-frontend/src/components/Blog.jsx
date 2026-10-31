@@ -38,6 +38,7 @@ const Blog = ({ blog, user, }) => {
   return (
 
     <div><h2>{`${blog.author}: ${blog.title}`}</h2>
+      <a href={blog.url}>{blog.url}</a>
 
 
       <button onClick={() => setVisible(!visible)}>

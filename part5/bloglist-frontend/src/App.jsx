@@ -39,14 +39,17 @@ const App = () => {
     padding: 5
   }
 
+  const logout = () => {
+    window.localStorage.removeItem('loggedBlogappUser')
+    setUser(null)
+  }
   return (
     <Router>
       <div>
         <Link style={padding} to="/">blogs</Link>
-        <Link style={padding} to="/login">login</Link>
         {!user && (<Link style={padding} to="/login">login</Link>)}
-        {!user && (<button onClick={() => handleLike(blog)}>
-          like
+        {user && (<button onClick={logout}>
+          logout
         </button>)}
       </div>
 

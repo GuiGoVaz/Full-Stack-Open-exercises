@@ -64,13 +64,7 @@ const BlogsPage = ({ user, blogs, setBlogs }) => {
     }
   }
 
-  const handleBlogUpdate = (updatedBlog) => {
-    setBlogs(prevBlogs =>
-      prevBlogs.map(blog =>
-        blog.id === updatedBlog.id ? updatedBlog : blog
-      )
-    )
-  }
+
 
   //{loggedIn()}
   return (

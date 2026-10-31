@@ -59,7 +59,7 @@ const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
         like
       </button></div>)}
       <div>Added by {blog.user?.name}</div>
-      {(user.username === blog.user.username) && (<button style={{
+      {user && (user.username === blog.user.username) && (<button style={{
         borderRadius: '4px',
         border: '1px solid #1367ba',
         background: 'linear-gradient(to bottom, #80ccff 0%, #33adff 45%, #0088cc 50%, #0099ff 100%)',

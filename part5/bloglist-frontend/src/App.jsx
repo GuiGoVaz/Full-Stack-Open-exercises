@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
 import Blog from "./components/Blog"
+import CreateBlogForm from './components/CreateBlogForm'
 
 const App = () => {
 
@@ -37,6 +38,24 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
   }
+  const handleCreateBlog = async (blogObject) => {
+
+    try {
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+      setNotifMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
+      setTimeout(() => {
+        setNotifMessage(null)
+      }, 5000)
+    }
+    catch {
+      setNotifMessage('missing title or url')
+      setTimeout(() => {
+        setNotifMessage(null)
+      }, 5000)
+      throw new Error("missing title or url");
+    }
+  }
   return (
     <>
       <div>
@@ -50,7 +69,9 @@ const App = () => {
         <Route path="/login" element={<LoginPage user={user} setUser={setUser} />
         } />
         <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} />} />
-        <Route path="/" element={<BlogsPage user={user} blogs={blogs} setBlogs={setBlogs} />} />
+        <Route path="/create" element={
+          <CreateBlogForm handleCreateBlog={handleCreateBlog} />
+        } />
         <Route path="/blogs/:id" element={
           <Blog blog={blog} user={user} setUser={setUser} blogs={blogs} setBlogs={setBlogs} />
         } />

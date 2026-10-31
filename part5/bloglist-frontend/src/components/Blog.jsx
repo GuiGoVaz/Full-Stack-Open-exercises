@@ -4,7 +4,7 @@ import blogService from '../services/blogs'
 
 
 
-const Blog = ({ blog, user, }) => {
+const Blog = ({ blog, user, blogs, setBlogs }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,

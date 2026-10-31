@@ -139,11 +139,9 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path="/notes" element={
-          <NoteList notes={notes} />
-        } />
-        <Route path="/create" element={
-          <NoteForm createNote={addNote} />
+        <Route path="/login" element={
+          <div><LoginForm notifMessage={notifMessage} handleLogin={handleLogin} username={username}
+            setUsername={setUsername} password={password} setPassword={setPassword} /> </div>
         } />
         <Route path="/" element={<Home />} />
       </Routes>

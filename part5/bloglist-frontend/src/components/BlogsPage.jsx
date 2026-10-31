@@ -3,6 +3,7 @@ import Togglable from "./Togglable"
 import CreateBlogForm from "./CreateBlogForm"
 import { useState, useEffect } from 'react'
 import blogService from '../services/blogs'
+import { Link } from 'react-router-dom'
 
 
 
@@ -36,11 +37,9 @@ const BlogsPage = ({ user, blogs, setBlogs }) => {
   const blogForm = () => {
     blogs.sort((a, b) => b.likes - a.likes);
     return (
-
-
       <ul>
         {blogs.map(blog => {
-          return (<li key={blog.id}>{`${blog.title} by ${blog.author}`}</li>)
+          return (<li key={blog.id}><Link to={`/blogs/${blog.id}`}>{`${blog.title} by ${blog.author}`}</Link></li>)
         }
         )}</ul>
     )

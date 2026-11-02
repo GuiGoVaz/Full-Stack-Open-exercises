@@ -1,11 +1,4 @@
 import { useState } from 'react'
-<<<<<<< HEAD
-
-const CreateBlogForm = ({ handleCreateBlog }) => {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
-=======
 import Notification from './Notification'
 import { TextField, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
@@ -15,7 +8,6 @@ const CreateBlogForm = ({ handleCreateBlog, notifMessage, user }) => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const navigate = useNavigate()
->>>>>>> draft
 
   const handler = async event => {
     event.preventDefault()
@@ -33,35 +25,6 @@ const CreateBlogForm = ({ handleCreateBlog, notifMessage, user }) => {
     catch {
     }
   }
-<<<<<<< HEAD
-
-  return (
-    <>
-      <h2>create new</h2>
-      <form onSubmit={handler}>
-        <div>
-          <label>
-            title:
-            <input type="text" value={title} onChange={({ target }) => setTitle(target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            author:
-            <input type="text" value={author} onChange={({ target }) => setAuthor(target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            url:
-            <input type="text" value={url} onChange={({ target }) => setUrl(target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit">create</button>
-=======
   if (!user) {
     navigate('/')
     return
@@ -98,7 +61,6 @@ const CreateBlogForm = ({ handleCreateBlog, notifMessage, user }) => {
             create
           </Button>
         </div>
->>>>>>> draft
       </form>
     </>
   )

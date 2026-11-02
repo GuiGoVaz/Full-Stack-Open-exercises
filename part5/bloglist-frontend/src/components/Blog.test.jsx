@@ -1,16 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-<<<<<<< HEAD
-import Togglable from './Togglable'
-import Blog from './Blog'
-
-const blog = {
-    title: "Title test7",
-    author: "Author test2",
-    url: "url test2",
-    likes: "3",
-    id: "1",
-=======
 import Blog from './Blog'
 import { MemoryRouter } from 'react-router-dom';
 
@@ -20,7 +9,6 @@ const blog = {
     url: 'url test2',
     likes: '3',
     id: '1',
->>>>>>> draft
     user: {
         id: '6acd226126e3c8f99f463fe3',
         username: 'roo',
@@ -36,8 +24,6 @@ const user = {
     passwordHash: '$2b$10$DTa8A5RXZE0PAzgbCbAUO.rRrLP0SXOzlRw1D2MJv.UXnAxL6fiom',
 
 }
-<<<<<<< HEAD
-=======
 const user2 = { //who didn't make the blog
     id: '6acd226126e3c8f99f463fe4',
     username: 'roo3',
@@ -45,18 +31,10 @@ const user2 = { //who didn't make the blog
     passwordHash: '$2b$10$DTa8A5RXZE0PAzgbCbAUO.rRrLP0SXOzlRw1D2MJv.UXnAxL6fioy',
 
 }
->>>>>>> draft
 const mockHandler1 = vi.fn()
 const mockHandler2 = vi.fn()
 
 describe('<Blog />', () => {
-<<<<<<< HEAD
-    beforeEach(() => {
-
-
-        render(<Blog key={blog.id} blog={blog} user={user} handleLike={mockHandler1} handleRemove={mockHandler2} />)
-    })
-=======
     /* beforeEach(() => {
           //render(<Blog key={blog.id} blog={blog} user={user} handleLike={mockHandler1} handleRemove={mockHandler2} />)
           render(<Blog blog={blog} user={user} setBlogs={mockHandler1} />)
@@ -123,7 +101,6 @@ describe('<Blog />', () => {
     })
 
     //////////////// tests before router below
->>>>>>> draft
 
     test('renders title and author but not likes and URL by default', async () => {
 
@@ -150,11 +127,7 @@ describe('<Blog />', () => {
     test('after clicking the button, URL and likes are displayed', async () => {
         const user = userEvent.setup()
         const button = screen.queryByText(
-<<<<<<< HEAD
-            `view`, { exact: false }
-=======
             'view', { exact: false }
->>>>>>> draft
         )
         await user.click(button)
 
@@ -170,11 +143,6 @@ describe('<Blog />', () => {
     })
 
     test('like button works while pressing twice', async () => {
-<<<<<<< HEAD
-        const user = userEvent.setup()
-        const button = screen.queryByText(
-            `view`, { exact: false }
-=======
         render(
             <MemoryRouter>
                 <Blog blog={blog} user={user2} setBlogs={mockHandler1} />
@@ -191,7 +159,6 @@ describe('<Blog />', () => {
         const user = userEvent.setup()
         const button = screen.queryByText(
             'view', { exact: false }
->>>>>>> draft
         )
 
         await user.click(button)
@@ -205,9 +172,6 @@ describe('<Blog />', () => {
 
     })
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> draft
 })

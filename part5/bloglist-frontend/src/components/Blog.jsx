@@ -1,37 +1,9 @@
-<<<<<<< HEAD
-import { useEffect } from 'react'
-import blogService from '../services/blogs'
-import { useNavigate } from 'react-router-dom'
-
-
-
-
-const Blog = ({ blog, user, setUser, blogs, setBlogs }) => {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
-  }, [])
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
-  }, [])
-
-
-=======
 import blogService from '../services/blogs'
 import { useNavigate } from 'react-router-dom'
 import { Paper, Typography, Link, Button, Box, Stack } from '@mui/material'
 
 const Blog = ({ blog, user, setBlogs }) => {
   const navigate = useNavigate()
->>>>>>> draft
   const handleBlogUpdate = (updatedBlog) => {
     setBlogs(prevBlogs =>
       prevBlogs.map(blog =>
@@ -62,34 +34,6 @@ const Blog = ({ blog, user, setBlogs }) => {
     return null
   }
 
-<<<<<<< HEAD
-  return (
-
-    <div><h2>{`${blog.author}: ${blog.title}`}</h2>
-      <a href={blog.url}>{blog.url}</a>
-      {!user && (<div>likes {blog.likes}</div>)}
-      {user && (<div>likes {blog.likes} <button onClick={() => handleLike(blog)}>
-        like
-      </button></div>)}
-      <div>Added by {blog.user?.name}</div>
-      {user && (user.username === blog.user.username) && (<button style={{
-        borderRadius: '4px',
-        border: '1px solid #1367ba',
-        background: 'linear-gradient(to bottom, #80ccff 0%, #33adff 45%, #0088cc 50%, #0099ff 100%)',
-      }} onClick={() => handleRemove(blog)}>
-        remove
-      </button>)}
-
-    </div>
-
-
-
-
-
-  )
-}
-
-=======
   const canRemove = user && blog.user && (user.username === blog.user.username)
 
   return (
@@ -204,7 +148,6 @@ const Blog = ({ blog, user, setBlogs }) => {
     </Box>
   )
 }
->>>>>>> draft
 export default Blog
 
 

@@ -1,9 +1,21 @@
 import { useState } from 'react'
+<<<<<<< HEAD
 
 const CreateBlogForm = ({ handleCreateBlog }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+=======
+import Notification from './Notification'
+import { TextField, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+
+const CreateBlogForm = ({ handleCreateBlog, notifMessage, user }) => {
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
+  const navigate = useNavigate()
+>>>>>>> draft
 
   const handler = async event => {
     event.preventDefault()
@@ -21,6 +33,7 @@ const CreateBlogForm = ({ handleCreateBlog }) => {
     catch {
     }
   }
+<<<<<<< HEAD
 
   return (
     <>
@@ -48,6 +61,44 @@ const CreateBlogForm = ({ handleCreateBlog }) => {
           </label>
         </div>
         <button type="submit">create</button>
+=======
+  if (!user) {
+    navigate('/')
+    return
+  }
+  return (
+    <>
+      <Notification message={notifMessage} />
+      <h2>create new</h2>
+      <form onSubmit={handler}>
+        <TextField
+          label="title:"
+          value={title}
+          onChange={({ target }) => setTitle(target.value)}
+          sx={{ mb: 2 }}
+        />
+        <div>
+          <TextField
+            label="author:"
+            value={author}
+            onChange={({ target }) => setAuthor(target.value)}
+            sx={{ mb: 2 }}
+          />
+        </div>
+        <div>
+          <TextField
+            label="url:"
+            value={url}
+            onChange={({ target }) => setUrl(target.value)}
+            sx={{ mb: 1 }}
+          />
+        </div>
+        <div>
+          <Button type="submit" variant="contained" style={{ marginTop: 10 }}>
+            create
+          </Button>
+        </div>
+>>>>>>> draft
       </form>
     </>
   )

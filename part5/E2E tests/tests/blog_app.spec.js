@@ -16,6 +16,10 @@ describe("Blog app", () => {
   });
 
   test("Login form is shown", async ({ page }) => {
+<<<<<<< HEAD
+=======
+    await page.getByRole("link", { name: "login" }).click();
+>>>>>>> draft
     const locator = page.getByText("Log in to application");
     await expect(locator).toBeVisible();
     await expect(page.getByLabel("username")).toBeVisible();
@@ -25,6 +29,7 @@ describe("Blog app", () => {
 
   describe("Login", () => {
     test("succeeds with correct credentials", async ({ page }) => {
+<<<<<<< HEAD
       await loginWith(page, "mluukkai", "salainen");
 
       await expect(page.getByText("Matti Luukkainen logged in")).toBeVisible();
@@ -37,11 +42,32 @@ describe("Blog app", () => {
       await expect(
         page.getByText("Matti Luukkainen logged in"),
       ).not.toBeVisible();
+=======
+      await page.getByRole("link", { name: "login" }).click();
+      await loginWith(page, "mluukkai", "salainen");
+
+      await expect(
+        page.getByText("wrong username or password"),
+      ).not.toBeVisible();
+      await expect(page.getByText("new blog")).toBeVisible();
+    });
+
+    test("fails with wrong credentials", async ({ page }) => {
+      await page.getByRole("link", { name: "login" }).click();
+      await loginWith(page, "mluukkai", "wrong");
+
+      await expect(page.getByText("wrong username or password")).toBeVisible();
+      await expect(page.getByText("new blog")).not.toBeVisible();
+>>>>>>> draft
     });
   });
 
   describe("When logged in", () => {
     beforeEach(async ({ page }) => {
+<<<<<<< HEAD
+=======
+      await page.getByRole("link", { name: "login" }).click();
+>>>>>>> draft
       await loginWith(page, "mluukkai", "salainen");
     });
 
@@ -51,7 +77,11 @@ describe("Blog app", () => {
       await expect(
         page.getByText("a new blog testTitle1 by testAuthor1 added"),
       ).toBeVisible();
+<<<<<<< HEAD
       await expect(page.getByText("testTitle1 testAuthor1")).toBeVisible();
+=======
+      //await expect(page.getByText("testTitle1 by testAuthor1")).toBeVisible();
+>>>>>>> draft
     });
 
     describe("and several blogs exists", () => {
@@ -60,11 +90,16 @@ describe("Blog app", () => {
         await createBlog(page, "testTitle2", "testAuthor2", "testUrl2.com");
       });
       test("a new blog can be liked", async ({ page }) => {
+<<<<<<< HEAD
         await expect(page.getByText("likes 0")).not.toBeVisible();
 
         await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
+=======
+        await page
+          .getByRole("link", { name: "testTitle2 by testAuthor2" })
+>>>>>>> draft
           .click();
 
         await expect(page.getByText("likes 0")).toBeVisible();
@@ -78,15 +113,25 @@ describe("Blog app", () => {
       });
 
       test("a user who created a blog can delete it", async ({ page }) => {
+<<<<<<< HEAD
         await page
           .getByText("testTitle2 testAuthor2")
           .getByRole("button", { name: "view" })
+=======
+        await expect(page.getByText("testTitle1 by testAuthor1")).toBeVisible();
+        await page
+          .getByRole("link", { name: "testTitle1 by testAuthor1" })
+>>>>>>> draft
           .click();
 
         page.once("dialog", async (dialog) => {
           expect(dialog.type()).toBe("confirm");
           expect(dialog.message()).toBe(
+<<<<<<< HEAD
             "Remove blog testTitle2 by testAuthor2",
+=======
+            "Remove blog testTitle1 by testAuthor1",
+>>>>>>> draft
           );
 
           await dialog.accept();
@@ -95,11 +140,19 @@ describe("Blog app", () => {
         await page.getByRole("button", { name: "remove" }).click();
 
         await expect(
+<<<<<<< HEAD
           page.getByText("testTitle2 testAuthor2"),
+=======
+          page.getByText("testTitle1 by testAuthor1"),
+>>>>>>> draft
         ).not.toBeVisible();
       });
 
       test("a user can't delete someone else's blog", async ({
+<<<<<<< HEAD
+=======
+        //fixed after routers
+>>>>>>> draft
         page,
         request,
       }) => {
@@ -110,6 +163,7 @@ describe("Blog app", () => {
             password: "salainen2",
           },
         });
+<<<<<<< HEAD
 
         await page
           .getByText("Matti Luukkainen logged in")
@@ -124,6 +178,21 @@ describe("Blog app", () => {
           .click();
 
         await expect(page.getByText("remove")).not.toBeVisible();
+=======
+        await page.getByRole("button", { name: "logout" }).click();
+        await page.getByRole("link", { name: "login" }).click();
+        await loginWith(page, "mluukkai2", "salainen2");
+
+        await expect(page.getByText("testTitle1 by testAuthor1")).toBeVisible();
+        await page
+          .getByRole("link", { name: "testTitle1 by testAuthor1" })
+          .click();
+
+        const removeButton = await page.getByRole("button", { name: "remove" });
+        await expect(removeButton).not.toBeAttached();
+        const likeButton = await page.getByRole("button", { name: "like" });
+        await expect(likeButton).toBeAttached();
+>>>>>>> draft
       });
 
       test("blogs are arranged in the order according to the likes, with most likes first", async ({
